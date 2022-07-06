@@ -11,8 +11,6 @@ public class Admin implements Serializable {
 
     private String adminNickname;
 
-    private Integer isDeleted;
-
     private static final long serialVersionUID = 1L;
 
     public Integer getAdminId() {
@@ -47,14 +45,6 @@ public class Admin implements Serializable {
         this.adminNickname = adminNickname;
     }
 
-    public Integer getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(Integer isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -65,7 +55,6 @@ public class Admin implements Serializable {
         sb.append(", adminUsername=").append(adminUsername);
         sb.append(", adminPassword=").append(adminPassword);
         sb.append(", adminNickname=").append(adminNickname);
-        sb.append(", isDeleted=").append(isDeleted);
         sb.append("]");
         return sb.toString();
     }

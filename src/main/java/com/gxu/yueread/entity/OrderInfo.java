@@ -23,8 +23,6 @@ public class OrderInfo implements Serializable {
 
     private Integer orderStatus;
 
-    private Integer isDeleted;
-
     private Date createTime;
 
     private static final long serialVersionUID = 1L;
@@ -101,14 +99,6 @@ public class OrderInfo implements Serializable {
         this.orderStatus = orderStatus;
     }
 
-    public Integer getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(Integer isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
     public Date getCreateTime() {
         return createTime;
     }
@@ -132,7 +122,6 @@ public class OrderInfo implements Serializable {
         sb.append(", payType=").append(payType);
         sb.append(", payTime=").append(payTime);
         sb.append(", orderStatus=").append(orderStatus);
-        sb.append(", isDeleted=").append(isDeleted);
         sb.append(", createTime=").append(createTime);
         sb.append("]");
         return sb.toString();

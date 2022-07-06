@@ -6,22 +6,20 @@
  * Copyright (c) 2019-2021 十三 all rights reserved.
  * 版权所有，侵权必究！
  */
-package com.gxu.yueread.controller.admin.param;
+package com.gxu.yueread.config.annotation;
 
+import java.lang.annotation.*;
 
-import lombok.Data;
+@Target({ElementType.PARAMETER})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface TokenToMallUser {
 
+    /**
+     * 当前用户在request中的名字
+     *
+     * @return
+     */
+    String value() default "user";
 
-import java.io.Serializable;
-
-@Data
-public class AdminLoginParam implements Serializable {
-
-//    @ApiModelProperty("登录名")
-//    @NotEmpty(message = "登录名不能为空")
-    private String username;
-
-//    @ApiModelProperty("用户密码(需要MD5加密)")
-//    @NotEmpty(message = "密码不能为空")
-    private String passwordMD5;
 }

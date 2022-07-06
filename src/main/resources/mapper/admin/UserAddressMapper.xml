@@ -13,12 +13,11 @@
     <result column="city_name" jdbcType="VARCHAR" property="cityName" />
     <result column="region_name" jdbcType="VARCHAR" property="regionName" />
     <result column="detail_address" jdbcType="VARCHAR" property="detailAddress" />
-    <result column="is_deleted" jdbcType="INTEGER" property="isDeleted" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     address_id, user_id, user_name, user_phone, dafault_flag, province_name, city_name, 
-    region_name, detail_address, is_deleted
+    region_name, detail_address
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -36,12 +35,10 @@
     <!--@mbg.generated-->
     insert into user_address (user_id, user_name, user_phone, 
       dafault_flag, province_name, city_name, 
-      region_name, detail_address, is_deleted
-      )
+      region_name, detail_address)
     values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPhone,jdbcType=INTEGER}, 
       #{dafaultFlag,jdbcType=INTEGER}, #{provinceName,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR}, 
-      #{regionName,jdbcType=VARCHAR}, #{detailAddress,jdbcType=VARCHAR}, #{isDeleted,jdbcType=INTEGER}
-      )
+      #{regionName,jdbcType=VARCHAR}, #{detailAddress,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="address_id" keyProperty="addressId" parameterType="com.gxu.yueread.entity.UserAddress" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -71,9 +68,6 @@
       <if test="detailAddress != null">
         detail_address,
       </if>
-      <if test="isDeleted != null">
-        is_deleted,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -99,9 +93,6 @@
       </if>
       <if test="detailAddress != null">
         #{detailAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="isDeleted != null">
-        #{isDeleted,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -133,9 +124,6 @@
       <if test="detailAddress != null">
         detail_address = #{detailAddress,jdbcType=VARCHAR},
       </if>
-      <if test="isDeleted != null">
-        is_deleted = #{isDeleted,jdbcType=INTEGER},
-      </if>
     </set>
     where address_id = #{addressId,jdbcType=INTEGER}
   </update>
@@ -149,8 +137,7 @@
       province_name = #{provinceName,jdbcType=VARCHAR},
       city_name = #{cityName,jdbcType=VARCHAR},
       region_name = #{regionName,jdbcType=VARCHAR},
-      detail_address = #{detailAddress,jdbcType=VARCHAR},
-      is_deleted = #{isDeleted,jdbcType=INTEGER}
+      detail_address = #{detailAddress,jdbcType=VARCHAR}
     where address_id = #{addressId,jdbcType=INTEGER}
   </update>
 </mapper>

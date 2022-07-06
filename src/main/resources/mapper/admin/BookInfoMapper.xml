@@ -188,4 +188,33 @@
       publish_date = #{publishDate,jdbcType=DATE}
     where book_id = #{bookId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByBookIsbn" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from book_info
+    where book_isbn = #{bookIsbn,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectBookList" parameterType="Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from book_info
+    order by book_id desc
+    <if test="start!=null and limit!=null">
+      limit #{start},#{limit}
+    </if>
+  </select>
+
+  <select id="getTotalBookCount" parameterType="Map" resultType="int">
+    select count(*) from book_info
+  </select>
+
+  <update id="batchModifyBookStatus">
+    update book_info
+    set book_status=#{bookStatus} where book_id in
+    <foreach item="id" collection="ids" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+  </update>
 </mapper>

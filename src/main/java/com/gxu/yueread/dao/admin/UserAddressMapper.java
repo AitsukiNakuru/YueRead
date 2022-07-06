@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserAddressMapper {
     /**
      * delete by primary key
+     *
      * @param addressId primaryKey
      * @return deleteCount
      */
@@ -14,6 +15,7 @@ public interface UserAddressMapper {
 
     /**
      * insert record to table
+     *
      * @param record the record
      * @return insert count
      */
@@ -21,6 +23,7 @@ public interface UserAddressMapper {
 
     /**
      * insert record to table selective
+     *
      * @param record the record
      * @return insert count
      */
@@ -28,6 +31,7 @@ public interface UserAddressMapper {
 
     /**
      * select by primary key
+     *
      * @param addressId primary key
      * @return object by primary key
      */
@@ -35,6 +39,7 @@ public interface UserAddressMapper {
 
     /**
      * update record selective
+     *
      * @param record the updated record
      * @return update count
      */
@@ -42,6 +47,7 @@ public interface UserAddressMapper {
 
     /**
      * update record
+     *
      * @param record the updated record
      * @return update count
      */

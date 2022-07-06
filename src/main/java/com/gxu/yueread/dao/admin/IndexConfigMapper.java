@@ -1,17 +1,17 @@
 package com.gxu.yueread.dao.admin;
 
-import com.gxu.yueread.entity.Admin;
-import org.apache.ibatis.annotations.Mapper;import org.apache.ibatis.annotations.Param;
+import com.gxu.yueread.entity.IndexConfig;
+import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface AdminMapper {
+public interface IndexConfigMapper {
     /**
      * delete by primary key
      *
-     * @param adminId primaryKey
+     * @param configId primaryKey
      * @return deleteCount
      */
-    int deleteByPrimaryKey(Integer adminId);
+    int deleteByPrimaryKey(Integer configId);
 
     /**
      * insert record to table
@@ -19,7 +19,7 @@ public interface AdminMapper {
      * @param record the record
      * @return insert count
      */
-    int insert(Admin record);
+    int insert(IndexConfig record);
 
     /**
      * insert record to table selective
@@ -27,15 +27,15 @@ public interface AdminMapper {
      * @param record the record
      * @return insert count
      */
-    int insertSelective(Admin record);
+    int insertSelective(IndexConfig record);
 
     /**
      * select by primary key
      *
-     * @param adminId primary key
+     * @param configId primary key
      * @return object by primary key
      */
-    Admin selectByPrimaryKey(Integer adminId);
+    IndexConfig selectByPrimaryKey(Integer configId);
 
     /**
      * update record selective
@@ -43,7 +43,7 @@ public interface AdminMapper {
      * @param record the updated record
      * @return update count
      */
-    int updateByPrimaryKeySelective(Admin record);
+    int updateByPrimaryKeySelective(IndexConfig record);
 
     /**
      * update record
@@ -51,7 +51,5 @@ public interface AdminMapper {
      * @param record the updated record
      * @return update count
      */
-    int updateByPrimaryKey(Admin record);
-
-    Admin login(@Param("adminUsername") String adminUsername, @Param("adminPassword") String adminPassword);
+    int updateByPrimaryKey(IndexConfig record);
 }

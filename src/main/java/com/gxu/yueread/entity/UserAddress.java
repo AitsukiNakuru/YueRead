@@ -21,8 +21,6 @@ public class UserAddress implements Serializable {
 
     private String detailAddress;
 
-    private Integer isDeleted;
-
     private static final long serialVersionUID = 1L;
 
     public Integer getAddressId() {
@@ -97,14 +95,6 @@ public class UserAddress implements Serializable {
         this.detailAddress = detailAddress;
     }
 
-    public Integer getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(Integer isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -120,7 +110,6 @@ public class UserAddress implements Serializable {
         sb.append(", cityName=").append(cityName);
         sb.append(", regionName=").append(regionName);
         sb.append(", detailAddress=").append(detailAddress);
-        sb.append(", isDeleted=").append(isDeleted);
         sb.append("]");
         return sb.toString();
     }

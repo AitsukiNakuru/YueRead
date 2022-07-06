@@ -13,8 +13,6 @@ public class BookCategory implements Serializable {
 
     private Integer categoryRank;
 
-    private Integer isDeleted;
-
     private static final long serialVersionUID = 1L;
 
     public Integer getCategoryId() {
@@ -57,14 +55,6 @@ public class BookCategory implements Serializable {
         this.categoryRank = categoryRank;
     }
 
-    public Integer getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(Integer isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -76,7 +66,6 @@ public class BookCategory implements Serializable {
         sb.append(", parentId=").append(parentId);
         sb.append(", categoryName=").append(categoryName);
         sb.append(", categoryRank=").append(categoryRank);
-        sb.append(", isDeleted=").append(isDeleted);
         sb.append("]");
         return sb.toString();
     }

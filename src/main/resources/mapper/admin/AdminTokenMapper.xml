@@ -25,17 +25,20 @@
     delete from admin_token
     where admin_id = #{adminId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="admin_id" keyProperty="adminId" parameterType="com.gxu.yueread.entity.AdminToken" useGeneratedKeys="true">
+  <insert id="insert" parameterType="com.gxu.yueread.entity.AdminToken">
     <!--@mbg.generated-->
-    insert into admin_token (admin_token, create_time, expire_time
-      )
-    values (#{adminToken,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{expireTime,jdbcType=TIMESTAMP}
-      )
+    insert into admin_token (admin_id, admin_token, create_time, 
+      expire_time)
+    values (#{adminId,jdbcType=INTEGER}, #{adminToken,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{expireTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" keyColumn="admin_id" keyProperty="adminId" parameterType="com.gxu.yueread.entity.AdminToken" useGeneratedKeys="true">
+  <insert id="insertSelective" parameterType="com.gxu.yueread.entity.AdminToken">
     <!--@mbg.generated-->
     insert into admin_token
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="adminId != null">
+        admin_id,
+      </if>
       <if test="adminToken != null">
         admin_token,
       </if>
@@ -47,6 +50,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="adminId != null">
+        #{adminId,jdbcType=INTEGER},
+      </if>
       <if test="adminToken != null">
         #{adminToken,jdbcType=VARCHAR},
       </if>

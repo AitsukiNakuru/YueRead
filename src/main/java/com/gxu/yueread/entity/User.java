@@ -13,8 +13,6 @@ public class User implements Serializable {
 
     private String userIntroduceSign;
 
-    private Integer isDeleted;
-
     private static final long serialVersionUID = 1L;
 
     public Integer getUserId() {
@@ -57,14 +55,6 @@ public class User implements Serializable {
         this.userIntroduceSign = userIntroduceSign;
     }
 
-    public Integer getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(Integer isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -76,7 +66,6 @@ public class User implements Serializable {
         sb.append(", userPassword=").append(userPassword);
         sb.append(", userNickname=").append(userNickname);
         sb.append(", userIntroduceSign=").append(userIntroduceSign);
-        sb.append(", isDeleted=").append(isDeleted);
         sb.append("]");
         return sb.toString();
     }

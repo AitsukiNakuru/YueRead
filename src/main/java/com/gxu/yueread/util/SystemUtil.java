@@ -21,6 +21,7 @@ public class SystemUtil {
             return null;
         }
         try {
+            //https://blog.csdn.net/nicolezhangcheers/article/details/52038379
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(src.getBytes());
             String result = new BigInteger(1, md.digest()).toString(16);

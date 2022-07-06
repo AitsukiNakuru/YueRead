@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface OrderInfoMapper {
     /**
      * delete by primary key
+     *
      * @param orderId primaryKey
      * @return deleteCount
      */
@@ -14,6 +15,7 @@ public interface OrderInfoMapper {
 
     /**
      * insert record to table
+     *
      * @param record the record
      * @return insert count
      */
@@ -21,6 +23,7 @@ public interface OrderInfoMapper {
 
     /**
      * insert record to table selective
+     *
      * @param record the record
      * @return insert count
      */
@@ -28,6 +31,7 @@ public interface OrderInfoMapper {
 
     /**
      * select by primary key
+     *
      * @param orderId primary key
      * @return object by primary key
      */
@@ -35,6 +39,7 @@ public interface OrderInfoMapper {
 
     /**
      * update record selective
+     *
      * @param record the updated record
      * @return update count
      */
@@ -42,6 +47,7 @@ public interface OrderInfoMapper {
 
     /**
      * update record
+     *
      * @param record the updated record
      * @return update count
      */

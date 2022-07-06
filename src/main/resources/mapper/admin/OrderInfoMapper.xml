@@ -13,13 +13,12 @@
     <result column="pay_type" jdbcType="VARCHAR" property="payType" />
     <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
     <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
-    <result column="is_deleted" jdbcType="INTEGER" property="isDeleted" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     order_id, order_no, user_id, address_id, total_price, pay_status, pay_type, pay_time, 
-    order_status, is_deleted, create_time
+    order_status, create_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -37,12 +36,12 @@
     <!--@mbg.generated-->
     insert into order_info (order_no, user_id, address_id, 
       total_price, pay_status, pay_type, 
-      pay_time, order_status, is_deleted, 
-      create_time)
+      pay_time, order_status, create_time
+      )
     values (#{orderNo,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{addressId,jdbcType=INTEGER}, 
       #{totalPrice,jdbcType=DECIMAL}, #{payStatus,jdbcType=INTEGER}, #{payType,jdbcType=VARCHAR}, 
-      #{payTime,jdbcType=TIMESTAMP}, #{orderStatus,jdbcType=INTEGER}, #{isDeleted,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP})
+      #{payTime,jdbcType=TIMESTAMP}, #{orderStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="order_id" keyProperty="orderId" parameterType="com.gxu.yueread.entity.OrderInfo" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -72,9 +71,6 @@
       <if test="orderStatus != null">
         order_status,
       </if>
-      <if test="isDeleted != null">
-        is_deleted,
-      </if>
       <if test="createTime != null">
         create_time,
       </if>
@@ -103,9 +99,6 @@
       </if>
       <if test="orderStatus != null">
         #{orderStatus,jdbcType=INTEGER},
-      </if>
-      <if test="isDeleted != null">
-        #{isDeleted,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -140,9 +133,6 @@
       <if test="orderStatus != null">
         order_status = #{orderStatus,jdbcType=INTEGER},
       </if>
-      <if test="isDeleted != null">
-        is_deleted = #{isDeleted,jdbcType=INTEGER},
-      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -160,7 +150,6 @@
       pay_type = #{payType,jdbcType=VARCHAR},
       pay_time = #{payTime,jdbcType=TIMESTAMP},
       order_status = #{orderStatus,jdbcType=INTEGER},
-      is_deleted = #{isDeleted,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>

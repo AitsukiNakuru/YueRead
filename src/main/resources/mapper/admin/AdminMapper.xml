@@ -8,11 +8,10 @@
     <result column="admin_username" jdbcType="VARCHAR" property="adminUsername" />
     <result column="admin_password" jdbcType="VARCHAR" property="adminPassword" />
     <result column="admin_nickname" jdbcType="VARCHAR" property="adminNickname" />
-    <result column="is_deleted" jdbcType="INTEGER" property="isDeleted" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    admin_id, admin_username, admin_password, admin_nickname, is_deleted
+    admin_id, admin_username, admin_password, admin_nickname
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -28,10 +27,10 @@
   </delete>
   <insert id="insert" keyColumn="admin_id" keyProperty="adminId" parameterType="com.gxu.yueread.entity.Admin" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into `admin` (admin_username, admin_password, admin_nickname, 
-      is_deleted)
-    values (#{adminUsername,jdbcType=VARCHAR}, #{adminPassword,jdbcType=VARCHAR}, #{adminNickname,jdbcType=VARCHAR}, 
-      #{isDeleted,jdbcType=INTEGER})
+    insert into `admin` (admin_username, admin_password, admin_nickname
+      )
+    values (#{adminUsername,jdbcType=VARCHAR}, #{adminPassword,jdbcType=VARCHAR}, #{adminNickname,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="admin_id" keyProperty="adminId" parameterType="com.gxu.yueread.entity.Admin" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -46,9 +45,6 @@
       <if test="adminNickname != null">
         admin_nickname,
       </if>
-      <if test="isDeleted != null">
-        is_deleted,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="adminUsername != null">
@@ -59,9 +55,6 @@
       </if>
       <if test="adminNickname != null">
         #{adminNickname,jdbcType=VARCHAR},
-      </if>
-      <if test="isDeleted != null">
-        #{isDeleted,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -78,9 +71,6 @@
       <if test="adminNickname != null">
         admin_nickname = #{adminNickname,jdbcType=VARCHAR},
       </if>
-      <if test="isDeleted != null">
-        is_deleted = #{isDeleted,jdbcType=INTEGER},
-      </if>
     </set>
     where admin_id = #{adminId,jdbcType=INTEGER}
   </update>
@@ -89,8 +79,13 @@
     update `admin`
     set admin_username = #{adminUsername,jdbcType=VARCHAR},
       admin_password = #{adminPassword,jdbcType=VARCHAR},
-      admin_nickname = #{adminNickname,jdbcType=VARCHAR},
-      is_deleted = #{isDeleted,jdbcType=INTEGER}
+      admin_nickname = #{adminNickname,jdbcType=VARCHAR}
     where admin_id = #{adminId,jdbcType=INTEGER}
   </update>
+  <select id="login" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from admin
+    where admin_username = #{adminUsername,jdbcType=VARCHAR} AND admin_password = #{adminPassword,jdbcType=VARCHAR}
+  </select>
 </mapper>

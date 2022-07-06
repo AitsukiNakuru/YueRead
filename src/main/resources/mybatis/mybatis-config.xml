@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties>
+        <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/yueread?useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true"/>
+        <property name="username" value="root"/>
+        <property name="password" value="citlus20011030"/>
+    </properties>
+    <settings>
+        <setting name="cacheEnabled"             value="true" />  <!-- 全局映射器启用缓存 -->
+        <setting name="useGeneratedKeys"         value="true" />  <!-- 允许 JDBC 支持自动生成主键 -->
+        <setting name="defaultExecutorType"      value="REUSE" /> <!-- 配置默认的执行器 -->
+        <setting name="logImpl"                  value="SLF4J" /> <!-- 指定 MyBatis 所用日志的具体实现 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <typeAliases>
+        <package name="com.gxu.yueread.entity"/>
+    </typeAliases>
+
+
+</configuration>

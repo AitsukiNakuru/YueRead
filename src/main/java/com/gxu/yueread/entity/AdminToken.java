@@ -46,6 +46,13 @@ public class AdminToken implements Serializable {
         this.expireTime = expireTime;
     }
 
+    public AdminToken(Integer adminId, String adminToken, Date createTime, Date expireTime) {
+        this.adminId = adminId;
+        this.adminToken = adminToken;
+        this.createTime = createTime;
+        this.expireTime = expireTime;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

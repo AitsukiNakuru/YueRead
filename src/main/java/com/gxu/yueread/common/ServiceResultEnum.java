@@ -33,13 +33,13 @@ public enum ServiceResultEnum {
 
     SAME_INDEX_CONFIG_EXIST("已存在相同的首页配置项！"),
 
-    GOODS_CATEGORY_ERROR("分类数据异常！"),
+    BOOK_CATEGORY_ERROR("分类数据异常！"),
 
-    SAME_GOODS_EXIST("已存在相同的商品信息！"),
+    SAME_BOOK_EXIST("已存在相同的商品信息！"),
 
-    GOODS_NOT_EXIST("商品不存在！"),
+    BOOK_NOT_EXIST("商品不存在！"),
 
-    GOODS_PUT_DOWN("商品已下架！"),
+    BOOK_PUT_DOWN("商品已下架！"),
 
     SHOPPING_CART_ITEM_LIMIT_NUMBER_ERROR("超出单个商品的最大购买数量！"),
 
