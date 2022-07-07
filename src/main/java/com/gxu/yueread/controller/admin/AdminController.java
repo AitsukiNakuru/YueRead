@@ -1,8 +1,10 @@
 package com.gxu.yueread.controller.admin;
 
 import com.gxu.yueread.common.Constants;
+import com.gxu.yueread.common.ServiceResultEnum;
 import com.gxu.yueread.config.annotation.TokenToAdminUser;
 import com.gxu.yueread.controller.admin.param.AdminLoginParam;
+import com.gxu.yueread.controller.admin.param.AdminRegisterParam;
 import com.gxu.yueread.entity.Admin;
 import com.gxu.yueread.entity.AdminToken;
 import com.gxu.yueread.service.admin.AdminService;
@@ -57,10 +59,19 @@ public class AdminController {
         return ResultGenerator.genFailResult(loginResult);
     }
 
-    @RequestMapping(value = "/logout")
+    @RequestMapping("/logout")
     public Result logout(@RequestBody AdminToken adminToken) {
         logger.info("adminUser:{}", adminToken.toString());
         adminService.logout(adminToken.getAdminId());
+        return ResultGenerator.genSuccessResult();
+    }
+
+    @RequestMapping("/register")
+    public Result register(@RequestBody AdminRegisterParam adminRegisterParam) {
+        String registerResult = adminService.register(adminRegisterParam.getAdminUsername(), adminRegisterParam.getAdminPassword(), adminRegisterParam.getAdminNickname());
+        if (registerResult == ServiceResultEnum.REGISTER_ERROR.getResult()) {
+            return ResultGenerator.genFailResult(registerResult);
+        }
         return ResultGenerator.genSuccessResult();
     }
 

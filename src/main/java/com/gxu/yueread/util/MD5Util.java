@@ -27,17 +27,12 @@ public class MD5Util {
         return hexDigits[d1] + hexDigits[d2];
     }
 
-    public static String MD5Encode(String origin, String charsetname) {
+    public static String MD5Encode(String origin) {
         String resultString = null;
         try {
             resultString = new String(origin);
             MessageDigest md = MessageDigest.getInstance("MD5");
-            if (charsetname == null || "".equals(charsetname))
-                resultString = byteArrayToHexString(md.digest(resultString
-                        .getBytes()));
-            else
-                resultString = byteArrayToHexString(md.digest(resultString
-                        .getBytes(charsetname)));
+            resultString = byteArrayToHexString(md.digest(resultString.getBytes()));
         } catch (Exception exception) {
         }
         return resultString;

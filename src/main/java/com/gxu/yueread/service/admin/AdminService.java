@@ -3,7 +3,9 @@ package com.gxu.yueread.service.admin;
 import com.gxu.yueread.common.ServiceResultEnum;
 import com.gxu.yueread.dao.admin.AdminTokenMapper;
 import com.gxu.yueread.entity.AdminToken;
+import com.gxu.yueread.util.MD5Util;
 import com.gxu.yueread.util.NumberUtil;
+import com.gxu.yueread.util.Result;
 import com.gxu.yueread.util.SystemUtil;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -87,5 +89,14 @@ public class AdminService {
 
     public Boolean logout(Integer adminId) {
         return adminTokenMapper.deleteByPrimaryKey(adminId) > 0;
+    }
+
+    public String register(String adminUsername, String adminPassword, String adminNickname) {
+        MD5Util md5Util = new MD5Util();
+        Admin admin = new Admin(adminUsername, md5Util.MD5Encode(adminPassword), adminNickname);
+        if (this.insertSelective(admin) > 0) {
+            return "success";
+        }
+        return ServiceResultEnum.REGISTER_ERROR.getResult();
     }
 }

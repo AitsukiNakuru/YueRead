@@ -45,6 +45,12 @@ public class Admin implements Serializable {
         this.adminNickname = adminNickname;
     }
 
+    public Admin(String adminUsername, String adminPassword, String adminNickname) {
+        this.adminUsername = adminUsername;
+        this.adminPassword = adminPassword;
+        this.adminNickname = adminNickname;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
