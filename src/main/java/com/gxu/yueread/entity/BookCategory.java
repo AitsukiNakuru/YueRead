@@ -5,13 +5,7 @@ import java.io.Serializable;
 public class BookCategory implements Serializable {
     private Integer categoryId;
 
-    private Integer categoryLevel;
-
-    private Integer parentId;
-
     private String categoryName;
-
-    private Integer categoryRank;
 
     private static final long serialVersionUID = 1L;
 
@@ -23,36 +17,12 @@ public class BookCategory implements Serializable {
         this.categoryId = categoryId;
     }
 
-    public Integer getCategoryLevel() {
-        return categoryLevel;
-    }
-
-    public void setCategoryLevel(Integer categoryLevel) {
-        this.categoryLevel = categoryLevel;
-    }
-
-    public Integer getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
-    }
-
     public String getCategoryName() {
         return categoryName;
     }
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
-    }
-
-    public Integer getCategoryRank() {
-        return categoryRank;
-    }
-
-    public void setCategoryRank(Integer categoryRank) {
-        this.categoryRank = categoryRank;
     }
 
     @Override
@@ -62,10 +32,7 @@ public class BookCategory implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", categoryId=").append(categoryId);
-        sb.append(", categoryLevel=").append(categoryLevel);
-        sb.append(", parentId=").append(parentId);
         sb.append(", categoryName=").append(categoryName);
-        sb.append(", categoryRank=").append(categoryRank);
         sb.append("]");
         return sb.toString();
     }

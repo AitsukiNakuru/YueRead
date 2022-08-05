@@ -15,7 +15,6 @@ public class BookAddParam {
     private String bookCover;
     private String detailContent;
     private BigDecimal originalPrice;
-    private BigDecimal sellingPrice;
     private int bookStatus;
     private String publisher;
     private Date publishDate;

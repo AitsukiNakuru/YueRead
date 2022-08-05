@@ -1,10 +1,11 @@
 package com.gxu.yueread.util;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 
-public class PageQueryUtil extends LinkedHashMap<String, Object> {
+public class PageQueryUtil extends HashMap<String, Object> {
     //当前页码
     private int page;
     //每页条数

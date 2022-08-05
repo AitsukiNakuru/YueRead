@@ -1,6 +1,6 @@
 package com.gxu.yueread.controller.admin;
 import com.gxu.yueread.entity.BookCategory;
-import com.gxu.yueread.service.admin.BookCategoryService;
+import com.gxu.yueread.service.BookCategoryService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

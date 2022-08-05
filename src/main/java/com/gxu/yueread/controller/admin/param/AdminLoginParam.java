@@ -19,9 +19,9 @@ public class AdminLoginParam implements Serializable {
 
 //    @ApiModelProperty("登录名")
 //    @NotEmpty(message = "登录名不能为空")
-    private String username;
+    private String adminUsername;
 
 //    @ApiModelProperty("用户密码(需要MD5加密)")
 //    @NotEmpty(message = "密码不能为空")
-    private String passwordMD5;
+    private String adminPassword;
 }

@@ -45,7 +45,7 @@ public abstract class BeanUtil {
     }
 
     public static Map<String, Object> toMap(Object bean, String... ignoreProperties) {
-        Map<String, Object> map = new LinkedHashMap<>();
+        Map<String, Object> map = new HashMap<>();
         List<String> ignoreList = new ArrayList<>(Arrays.asList(ignoreProperties));
         ignoreList.add("class");
         BeanWrapper beanWrapper = PropertyAccessorFactory.forBeanPropertyAccess(bean);

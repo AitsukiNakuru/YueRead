@@ -16,7 +16,6 @@ public class BookUpdateParam {
     private String bookCover;
     private String detailContent;
     private BigDecimal originalPrice;
-    private BigDecimal sellingPrice;
     private Integer bookStatus;
     private String publisher;
     private Date publishDate;

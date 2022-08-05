@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxu.yueread.dao.AdminMapper">
+  <resultMap id="BaseResultMap" type="com.gxu.yueread.entity.Admin">
+    <!--@mbg.generated-->
+    <!--@Table `admin`-->
+    <id column="admin_id" jdbcType="INTEGER" property="adminId" />
+    <result column="admin_username" jdbcType="VARCHAR" property="adminUsername" />
+    <result column="admin_password" jdbcType="VARCHAR" property="adminPassword" />
+    <result column="admin_nickname" jdbcType="VARCHAR" property="adminNickname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    admin_id, admin_username, admin_password, admin_nickname
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from `admin`
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from `admin`
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="admin_id" keyProperty="adminId" parameterType="com.gxu.yueread.entity.Admin" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into `admin` (admin_username, admin_password, admin_nickname
+      )
+    values (#{adminUsername,jdbcType=VARCHAR}, #{adminPassword,jdbcType=VARCHAR}, #{adminNickname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="admin_id" keyProperty="adminId" parameterType="com.gxu.yueread.entity.Admin" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into `admin`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="adminUsername != null">
+        admin_username,
+      </if>
+      <if test="adminPassword != null">
+        admin_password,
+      </if>
+      <if test="adminNickname != null">
+        admin_nickname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="adminUsername != null">
+        #{adminUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPassword != null">
+        #{adminPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="adminNickname != null">
+        #{adminNickname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxu.yueread.entity.Admin">
+    <!--@mbg.generated-->
+    update `admin`
+    <set>
+      <if test="adminUsername != null">
+        admin_username = #{adminUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPassword != null">
+        admin_password = #{adminPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="adminNickname != null">
+        admin_nickname = #{adminNickname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxu.yueread.entity.Admin">
+    <!--@mbg.generated-->
+    update `admin`
+    set admin_username = #{adminUsername,jdbcType=VARCHAR},
+      admin_password = #{adminPassword,jdbcType=VARCHAR},
+      admin_nickname = #{adminNickname,jdbcType=VARCHAR}
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </update>
+  <select id="login" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from admin
+    where admin_username = #{username} AND admin_password = #{password}
+  </select>
+
+  <select id="selectByAdminUsername" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List" />
+    from admin
+    where admin_username = #{username}
+
+  </select>
+</mapper>

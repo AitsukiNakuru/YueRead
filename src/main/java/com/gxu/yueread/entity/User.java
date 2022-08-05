@@ -11,7 +11,7 @@ public class User implements Serializable {
 
     private String userNickname;
 
-    private String userIntroduceSign;
+    private Integer userVip;
 
     private static final long serialVersionUID = 1L;
 
@@ -47,12 +47,12 @@ public class User implements Serializable {
         this.userNickname = userNickname;
     }
 
-    public String getUserIntroduceSign() {
-        return userIntroduceSign;
+    public Integer getUserVip() {
+        return userVip;
     }
 
-    public void setUserIntroduceSign(String userIntroduceSign) {
-        this.userIntroduceSign = userIntroduceSign;
+    public void setUserVip(Integer userVip) {
+        this.userVip = userVip;
     }
 
     @Override
@@ -65,7 +65,7 @@ public class User implements Serializable {
         sb.append(", userUsername=").append(userUsername);
         sb.append(", userPassword=").append(userPassword);
         sb.append(", userNickname=").append(userNickname);
-        sb.append(", userIntroduceSign=").append(userIntroduceSign);
+        sb.append(", userVip=").append(userVip);
         sb.append("]");
         return sb.toString();
     }

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxu.yueread.dao.BookInfoMapper">
+  <resultMap id="BaseResultMap" type="com.gxu.yueread.entity.BookInfo">
+    <!--@mbg.generated-->
+    <!--@Table book_info-->
+    <id column="book_id" jdbcType="INTEGER" property="bookId" />
+    <result column="book_name" jdbcType="VARCHAR" property="bookName" />
+    <result column="book_isbn" jdbcType="VARCHAR" property="bookIsbn" />
+    <result column="book_intro" jdbcType="VARCHAR" property="bookIntro" />
+    <result column="book_author" jdbcType="VARCHAR" property="bookAuthor" />
+    <result column="book_category_id" jdbcType="INTEGER" property="bookCategoryId" />
+    <result column="book_cover" jdbcType="VARCHAR" property="bookCover" />
+    <result column="detail_content" jdbcType="LONGVARCHAR" property="detailContent" />
+    <result column="original_price" jdbcType="DECIMAL" property="originalPrice" />
+    <result column="book_status" jdbcType="INTEGER" property="bookStatus" />
+    <result column="publisher" jdbcType="VARCHAR" property="publisher" />
+    <result column="publish_date" jdbcType="DATE" property="publishDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    book_id, book_name, book_isbn, book_intro, book_author, book_category_id, book_cover, 
+    detail_content, original_price, book_status, publisher, publish_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from book_info
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from book_info
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="book_id" keyProperty="bookId" parameterType="com.gxu.yueread.entity.BookInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into book_info (book_name, book_isbn, book_intro, 
+      book_author, book_category_id, book_cover, 
+      detail_content, original_price, book_status, 
+      publisher, publish_date)
+    values (#{bookName,jdbcType=VARCHAR}, #{bookIsbn,jdbcType=VARCHAR}, #{bookIntro,jdbcType=VARCHAR}, 
+      #{bookAuthor,jdbcType=VARCHAR}, #{bookCategoryId,jdbcType=INTEGER}, #{bookCover,jdbcType=VARCHAR}, 
+      #{detailContent,jdbcType=LONGVARCHAR}, #{originalPrice,jdbcType=DECIMAL}, #{bookStatus,jdbcType=INTEGER}, 
+      #{publisher,jdbcType=VARCHAR}, #{publishDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" keyColumn="book_id" keyProperty="bookId" parameterType="com.gxu.yueread.entity.BookInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into book_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bookName != null">
+        book_name,
+      </if>
+      <if test="bookIsbn != null">
+        book_isbn,
+      </if>
+      <if test="bookIntro != null">
+        book_intro,
+      </if>
+      <if test="bookAuthor != null">
+        book_author,
+      </if>
+      <if test="bookCategoryId != null">
+        book_category_id,
+      </if>
+      <if test="bookCover != null">
+        book_cover,
+      </if>
+      <if test="detailContent != null">
+        detail_content,
+      </if>
+      <if test="originalPrice != null">
+        original_price,
+      </if>
+      <if test="bookStatus != null">
+        book_status,
+      </if>
+      <if test="publisher != null">
+        publisher,
+      </if>
+      <if test="publishDate != null">
+        publish_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bookName != null">
+        #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookIsbn != null">
+        #{bookIsbn,jdbcType=VARCHAR},
+      </if>
+      <if test="bookIntro != null">
+        #{bookIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="bookAuthor != null">
+        #{bookAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="bookCategoryId != null">
+        #{bookCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="bookCover != null">
+        #{bookCover,jdbcType=VARCHAR},
+      </if>
+      <if test="detailContent != null">
+        #{detailContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="originalPrice != null">
+        #{originalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="bookStatus != null">
+        #{bookStatus,jdbcType=INTEGER},
+      </if>
+      <if test="publisher != null">
+        #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="publishDate != null">
+        #{publishDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxu.yueread.entity.BookInfo">
+    <!--@mbg.generated-->
+    update book_info
+    <set>
+      <if test="bookName != null">
+        book_name = #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookIsbn != null">
+        book_isbn = #{bookIsbn,jdbcType=VARCHAR},
+      </if>
+      <if test="bookIntro != null">
+        book_intro = #{bookIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="bookAuthor != null">
+        book_author = #{bookAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="bookCategoryId != null">
+        book_category_id = #{bookCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="bookCover != null">
+        book_cover = #{bookCover,jdbcType=VARCHAR},
+      </if>
+      <if test="detailContent != null">
+        detail_content = #{detailContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="originalPrice != null">
+        original_price = #{originalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="bookStatus != null">
+        book_status = #{bookStatus,jdbcType=INTEGER},
+      </if>
+      <if test="publisher != null">
+        publisher = #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="publishDate != null">
+        publish_date = #{publishDate,jdbcType=DATE},
+      </if>
+    </set>
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxu.yueread.entity.BookInfo">
+    <!--@mbg.generated-->
+    update book_info
+    set book_name = #{bookName,jdbcType=VARCHAR},
+      book_isbn = #{bookIsbn,jdbcType=VARCHAR},
+      book_intro = #{bookIntro,jdbcType=VARCHAR},
+      book_author = #{bookAuthor,jdbcType=VARCHAR},
+      book_category_id = #{bookCategoryId,jdbcType=INTEGER},
+      book_cover = #{bookCover,jdbcType=VARCHAR},
+      detail_content = #{detailContent,jdbcType=LONGVARCHAR},
+      original_price = #{originalPrice,jdbcType=DECIMAL},
+      book_status = #{bookStatus,jdbcType=INTEGER},
+      publisher = #{publisher,jdbcType=VARCHAR},
+      publish_date = #{publishDate,jdbcType=DATE}
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+
+  <select id="bookList" parameterType="Map" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List" />
+    from book_info
+    <where>
+      <if test="bookName!=null and bookName!=''">
+        and (book_name like CONCAT('%', #{bookName}, '%'))
+      </if>
+      <if test="bookCategoryId!=null and bookCategoryId!=''">
+        and book_category_id = #{bookCategoryId}
+      </if>
+    </where>
+    <if test="start!=null and limit!=null">
+      limit #{start}, #{limit}
+    </if>
+  </select>
+
+  <select id="getTotalCount" parameterType="Map" resultType="int">
+    select
+      count(*)
+    from book_info
+    <where>
+      <if test="bookName!=null and bookName!=''">
+        and (book_name like CONCAT('%', #{bookName}, '%'))
+      </if>
+      <if test="bookCategoryId!=null and bookCategoryId!=''">
+        and book_category_id = #{bookCategoryId}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByIsbn" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List" />
+    from book_info
+    where book_isbn = #{bookIsbn}
+  </select>
+</mapper>

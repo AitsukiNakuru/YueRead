@@ -11,7 +11,7 @@ public class UserAddress implements Serializable {
 
     private Integer userPhone;
 
-    private Integer dafaultFlag;
+    private Integer defaultFlag;
 
     private String provinceName;
 
@@ -55,12 +55,12 @@ public class UserAddress implements Serializable {
         this.userPhone = userPhone;
     }
 
-    public Integer getDafaultFlag() {
-        return dafaultFlag;
+    public Integer getDefaultFlag() {
+        return defaultFlag;
     }
 
-    public void setDafaultFlag(Integer dafaultFlag) {
-        this.dafaultFlag = dafaultFlag;
+    public void setDefaultFlag(Integer defaultFlag) {
+        this.defaultFlag = defaultFlag;
     }
 
     public String getProvinceName() {
@@ -105,7 +105,7 @@ public class UserAddress implements Serializable {
         sb.append(", userId=").append(userId);
         sb.append(", userName=").append(userName);
         sb.append(", userPhone=").append(userPhone);
-        sb.append(", dafaultFlag=").append(dafaultFlag);
+        sb.append(", defaultFlag=").append(defaultFlag);
         sb.append(", provinceName=").append(provinceName);
         sb.append(", cityName=").append(cityName);
         sb.append(", regionName=").append(regionName);

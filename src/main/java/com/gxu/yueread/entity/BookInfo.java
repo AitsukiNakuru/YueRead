@@ -23,8 +23,6 @@ public class BookInfo implements Serializable {
 
     private BigDecimal originalPrice;
 
-    private BigDecimal sellingPrice;
-
     private Integer bookStatus;
 
     private String publisher;
@@ -105,14 +103,6 @@ public class BookInfo implements Serializable {
         this.originalPrice = originalPrice;
     }
 
-    public BigDecimal getSellingPrice() {
-        return sellingPrice;
-    }
-
-    public void setSellingPrice(BigDecimal sellingPrice) {
-        this.sellingPrice = sellingPrice;
-    }
-
     public Integer getBookStatus() {
         return bookStatus;
     }
@@ -152,7 +142,6 @@ public class BookInfo implements Serializable {
         sb.append(", bookCover=").append(bookCover);
         sb.append(", detailContent=").append(detailContent);
         sb.append(", originalPrice=").append(originalPrice);
-        sb.append(", sellingPrice=").append(sellingPrice);
         sb.append(", bookStatus=").append(bookStatus);
         sb.append(", publisher=").append(publisher);
         sb.append(", publishDate=").append(publishDate);

@@ -11,7 +11,7 @@
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://localhost:3306/yueread?useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;nullCatalogMeansCurrent=true"
                         userId="root"
-                        password="citlus20011030">
+                        password="123456">
         </jdbcConnection>
 
         <javaTypeResolver>

@@ -13,6 +13,12 @@ public class Admin implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public Admin(String adminUsername, String adminPassword, String adminNickname) {
+        this.adminUsername = adminUsername;
+        this.adminPassword = adminPassword;
+        this.adminNickname = adminNickname;
+    }
+
     public Integer getAdminId() {
         return adminId;
     }
@@ -42,12 +48,6 @@ public class Admin implements Serializable {
     }
 
     public void setAdminNickname(String adminNickname) {
-        this.adminNickname = adminNickname;
-    }
-
-    public Admin(String adminUsername, String adminPassword, String adminNickname) {
-        this.adminUsername = adminUsername;
-        this.adminPassword = adminPassword;
         this.adminNickname = adminNickname;
     }
 
