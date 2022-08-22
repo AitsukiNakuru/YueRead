@@ -2,6 +2,7 @@ package com.gxu.yueread.dao;
 
 import com.gxu.yueread.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserMapper {
@@ -46,4 +47,6 @@ public interface UserMapper {
      * @return update count
      */
     int updateByPrimaryKey(User record);
+
+    User selectByUsername(@Param("username") String username);
 }

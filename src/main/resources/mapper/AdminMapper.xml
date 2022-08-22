@@ -85,14 +85,14 @@
   <select id="login" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from admin
-    where admin_username = #{username} AND admin_password = #{password}
+    from `admin`
+    where admin_username = #{username}
   </select>
 
   <select id="selectByAdminUsername" resultMap="BaseResultMap">
     select
       <include refid="Base_Column_List" />
-    from admin
+    from `admin`
     where admin_username = #{username}
 
   </select>

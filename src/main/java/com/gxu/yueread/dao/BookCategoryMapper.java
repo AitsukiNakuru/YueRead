@@ -3,6 +3,8 @@ package com.gxu.yueread.dao;
 import com.gxu.yueread.entity.BookCategory;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface BookCategoryMapper {
     /**
@@ -46,4 +48,8 @@ public interface BookCategoryMapper {
      * @return update count
      */
     int updateByPrimaryKey(BookCategory record);
+
+    BookCategory selectByCategoryName(String categoryName);
+
+    List<BookCategory> categoryList();
 }

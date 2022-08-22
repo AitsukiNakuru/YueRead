@@ -1,7 +1,6 @@
 package com.gxu.yueread.service;
 
 import com.gxu.yueread.common.ResultEnum;
-import com.gxu.yueread.controller.admin.param.AdminLoginParam;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.gxu.yueread.entity.Admin;
@@ -44,15 +43,15 @@ public class AdminService {
     }
 
     public Admin login(String username, String password) {
-        Admin admin = adminMapper.login(username, password);
+        Admin admin = adminMapper.login(username);
         return admin;
     }
 
 
     public String update(Admin admin, Integer originalId) {
         Admin targetAdmin = adminMapper.selectByAdminUsername(admin.getAdminUsername());
-        if (targetAdmin != null) {
-            return ResultEnum.SAME_LOGIN_NAME_EXIST.getResult();
+        if (targetAdmin != null && targetAdmin.getAdminId() != originalId) {
+            return ResultEnum.SAME_USERNAME_EXIST.getResult();
         }
         admin.setAdminId(originalId);
         if (adminMapper.updateByPrimaryKeySelective(admin) >=1 ) {
@@ -63,7 +62,7 @@ public class AdminService {
 
     public String register(Admin admin) {
         if (adminMapper.selectByAdminUsername(admin.getAdminUsername()) != null) {
-            return ResultEnum.SAME_LOGIN_NAME_EXIST.getResult();
+            return ResultEnum.SAME_USERNAME_EXIST.getResult();
         }
         if (adminMapper.insertSelective(admin) >= 1) {
             return ResultEnum.REGISTER_SUCCESS.getResult();

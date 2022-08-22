@@ -179,7 +179,7 @@
   <select id="bookList" parameterType="Map" resultMap="BaseResultMap">
     select
       <include refid="Base_Column_List" />
-    from book_info
+    from `book_info`
     <where>
       <if test="bookName!=null and bookName!=''">
         and (book_name like CONCAT('%', #{bookName}, '%'))
@@ -210,7 +210,7 @@
   <select id="selectByIsbn" resultMap="BaseResultMap">
     select
       <include refid="Base_Column_List" />
-    from book_info
+    from `book_info`
     where book_isbn = #{bookIsbn}
   </select>
 </mapper>

@@ -1,5 +1,6 @@
 package com.gxu.yueread.service;
 
+import com.gxu.yueread.common.ResultEnum;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.gxu.yueread.dao.UserMapper;
@@ -39,6 +40,21 @@ public class UserService {
 
     public int updateByPrimaryKey(User record) {
         return userMapper.updateByPrimaryKey(record);
+    }
+
+    public User login(String username, String password) {
+        return userMapper.selectByUsername(username);
+
+    }
+
+    public String register(User user) {
+        if (userMapper.selectByUsername(user.getUserUsername()) != null) {
+            return ResultEnum.SAME_USERNAME_EXIST.getResult();
+        }
+        if (userMapper.insertSelective(user) >= 1) {
+            return ResultEnum.REGISTER_SUCCESS.getResult();
+        }
+        return ResultEnum.REGISTER_ERROR.getResult();
     }
 
 }

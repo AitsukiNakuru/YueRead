@@ -6,14 +6,19 @@
  * Copyright (c) 2019-2021 十三 all rights reserved.
  * 版权所有，侵权必究！
  */
-package com.gxu.yueread.controller.admin.param;
+package com.gxu.yueread.controller.param;
 
 
 import lombok.Data;
 
 
 @Data
-public class GoodsCategoryAddParam {
+public class GoodsCategoryEditParam {
+
+//    @ApiModelProperty("待修改分类id")
+//    @NotNull(message = "分类id不能为空")
+//    @Min(value = 1, message = "分类id不能为空")
+    private Long categoryId;
 
 //    @ApiModelProperty("分类层级")
 //    @NotNull(message = "categoryLevel不能为空")

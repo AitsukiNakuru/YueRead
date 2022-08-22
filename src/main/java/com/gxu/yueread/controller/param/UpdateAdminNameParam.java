@@ -6,7 +6,7 @@
  * Copyright (c) 2019-2021 十三 all rights reserved.
  * 版权所有，侵权必究！
  */
-package com.gxu.yueread.controller.admin.param;
+package com.gxu.yueread.controller.param;
 
 import lombok.Data;
 

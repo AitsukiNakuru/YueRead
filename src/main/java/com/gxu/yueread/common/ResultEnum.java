@@ -12,9 +12,14 @@ public enum ResultEnum {
     ERROR("error"),
 
     SUCCESS("success"),
+
     LOGIN_ERROR("登录失败！"),
 
     LOGIN_SUCCESS("登陆成功"),
+
+    USERNAME_NOT_EXIST("用户名不存在"),
+
+    PASSWORD_ERROR("密码错误"),
 
     REGISTER_ERROR("注册失败！"),
 
@@ -28,13 +33,19 @@ public enum ResultEnum {
 
     ADD_SUCCESS("添加成功"),
 
+    DELETE_ERROR("删除失败"),
+
+    DELETE_SUCCESS("删除成功"),
+
     DATA_NOT_EXIST("未查询到记录！"),
 
     PARAM_ERROR("参数错误！"),
 
-    SAME_CATEGORY_EXIST("已存在同级同名的分类！"),
+    SAME_CATEGORY_EXIST("已存在同名的分类！"),
 
-    SAME_LOGIN_NAME_EXIST("用户名已存在！"),
+    CATEGORY_NOT_EXIST("分类不存在"),
+
+    SAME_USERNAME_EXIST("用户名已存在！"),
 
     LOGIN_NAME_NULL("请输入登录名！"),
 

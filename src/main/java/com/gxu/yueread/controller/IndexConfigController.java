@@ -1,4 +1,4 @@
-package com.gxu.yueread.controller.admin;
+package com.gxu.yueread.controller;
 import com.gxu.yueread.entity.IndexConfig;
 import com.gxu.yueread.service.IndexConfigService;
 import org.springframework.web.bind.annotation.*;

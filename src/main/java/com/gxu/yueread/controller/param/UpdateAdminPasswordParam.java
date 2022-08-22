@@ -6,14 +6,18 @@
  * Copyright (c) 2019-2021 十三 all rights reserved.
  * 版权所有，侵权必究！
  */
-package com.gxu.yueread.controller.admin.param;
+package com.gxu.yueread.controller.param;
 
 import lombok.Data;
 
-import java.io.Serializable;
+
 
 @Data
-public class BatchIdParam implements Serializable {
-    //id数组
-    Long[] ids;
+public class UpdateAdminPasswordParam {
+
+    //@NotEmpty(message = "originalPassword不能为空")
+    private String originalPassword;
+
+    //@NotEmpty(message = "newPassword不能为空")
+    private String newPassword;
 }

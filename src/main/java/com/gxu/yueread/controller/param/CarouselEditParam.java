@@ -6,7 +6,7 @@
  * Copyright (c) 2019-2021 十三 all rights reserved.
  * 版权所有，侵权必究！
  */
-package com.gxu.yueread.controller.admin.param;
+package com.gxu.yueread.controller.param;
 
 
 import lombok.Data;
@@ -14,7 +14,12 @@ import lombok.Data;
 
 
 @Data
-public class CarouselAddParam {
+public class CarouselEditParam {
+
+//    @ApiModelProperty("待修改轮播图id")
+//    @NotNull(message = "轮播图id不能为空")
+//    @Min(1)
+    private Integer carouselId;
 
 //    @ApiModelProperty("轮播图URL地址")
 //    @NotEmpty(message = "轮播图URL不能为空")

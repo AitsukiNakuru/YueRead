@@ -58,4 +58,17 @@
     set category_name = #{categoryName,jdbcType=VARCHAR}
     where category_id = #{categoryId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByCategoryName" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List" />
+    from `book_category`
+    where category_name = #{categoryName}
+  </select>
+
+  <select id="categoryList" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List" />
+    from `book_category`
+  </select>
 </mapper>
