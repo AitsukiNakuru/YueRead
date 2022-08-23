@@ -11,5 +11,4 @@ public class UserParam implements Serializable {
     private String userPassword;
     private String userNickname;
     private Integer userVip;
-
 }

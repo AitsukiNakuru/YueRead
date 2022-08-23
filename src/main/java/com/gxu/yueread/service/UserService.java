@@ -57,5 +57,16 @@ public class UserService {
         return ResultEnum.REGISTER_ERROR.getResult();
     }
 
+
+    public String update(User user) {
+        User targetUser = userMapper.selectByUsername(user.getUserUsername());
+        if (targetUser != null && targetUser.getUserId().equals(user.getUserId())) {
+            return  ResultEnum.SAME_USERNAME_EXIST.getResult();
+        }
+        if (userMapper.updateByPrimaryKey(user) >= 1) {
+            return ResultEnum.UPDATE_SUCCESS.getResult();
+        }
+        return ResultEnum.UPDATE_ERROR.getResult();
+    }
 }
 

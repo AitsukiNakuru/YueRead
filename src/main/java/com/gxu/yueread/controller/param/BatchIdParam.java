@@ -15,5 +15,5 @@ import java.io.Serializable;
 @Data
 public class BatchIdParam implements Serializable {
     //id数组
-    private Long[] ids;
+    private Integer[] ids;
 }

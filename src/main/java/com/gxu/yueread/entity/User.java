@@ -9,16 +9,33 @@ public class User implements Serializable {
 
     private String userPassword;
 
+
+
     private String userNickname;
 
     private Integer userVip;
 
     private static final long serialVersionUID = 1L;
 
+    public User(Integer userId, String userUsername, String userPassword, String userNickname) {
+        this.userId = userId;
+        this.userUsername = userUsername;
+        this.userPassword = userPassword;
+        this.userNickname = userNickname;
+    }
+
     public User(String userUsername, String userPassword, String userNickname) {
         this.userUsername = userUsername;
         this.userPassword = userPassword;
         this.userNickname = userNickname;
+    }
+
+    public User(Integer userId, String userUsername, String userPassword, String userNickname, Integer userVip) {
+        this.userId = userId;
+        this.userUsername = userUsername;
+        this.userPassword = userPassword;
+        this.userNickname = userNickname;
+        this.userVip = userVip;
     }
 
     public Integer getUserId() {

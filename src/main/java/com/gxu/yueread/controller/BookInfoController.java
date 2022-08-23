@@ -47,16 +47,16 @@ public class BookInfoController {
     //查询图书列表，暂时只能查询书名和分类
     @RequestMapping("/list")
     public Result bookList(@RequestBody BookListParam bookListParam) {
-        Map<String, Object> queryParam;
+        Map<String, Object> params;
         if (bookListParam.getBookInfo() != null) {
-            queryParam = BeanUtil.toMap(bookListParam.getBookInfo());
+            params = BeanUtil.toMap(bookListParam.getBookInfo());
         }
         else {
-            queryParam = new HashMap<String, Object>(16);
+            params = new HashMap<String, Object>(16);
         }
-        queryParam.put("page", bookListParam.getPageNumber());
-        queryParam.put("limit", bookListParam.getPageSize());
-        PageQueryUtil pageQueryUtil = new PageQueryUtil(queryParam);
+        params.put("page", bookListParam.getPageNumber());
+        params.put("limit", bookListParam.getPageSize());
+        PageQueryUtil pageQueryUtil = new PageQueryUtil(params);
         return ResultGenerator.genSuccessResult(bookInfoService.bookList(pageQueryUtil));
     }
 

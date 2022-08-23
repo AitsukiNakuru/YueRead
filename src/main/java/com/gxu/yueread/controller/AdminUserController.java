@@ -52,7 +52,7 @@ public class AdminUserController {
     //更新信息
     @RequestMapping("/update")
     public Result update(@RequestBody AdminParam adminParam) {
-        String updateResult = adminService.update(new Admin(adminParam.getAdminUsername(), adminParam.getAdminPassword(), adminParam.getAdminNickname()), adminParam.getOriginalId());
+        String updateResult = adminService.update(new Admin(adminParam.getAdminId(), adminParam.getAdminUsername(), adminParam.getAdminPassword(), adminParam.getAdminNickname()));
         if (updateResult.equals(ResultEnum.UPDATE_SUCCESS.getResult())) {
             return ResultGenerator.genSuccessResult(updateResult);
         }

@@ -10,5 +10,4 @@ public class AdminParam implements Serializable {
     private String adminUsername;
     private String adminPassword;
     private String adminNickname;
-    private Integer originalId;
 }

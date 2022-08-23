@@ -13,6 +13,13 @@ public class Admin implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public Admin(Integer adminId, String adminUsername, String adminPassword, String adminNickname) {
+        this.adminId = adminId;
+        this.adminUsername = adminUsername;
+        this.adminPassword = adminPassword;
+        this.adminNickname = adminNickname;
+    }
+
     public Admin(String adminUsername, String adminPassword, String adminNickname) {
         this.adminUsername = adminUsername;
         this.adminPassword = adminPassword;

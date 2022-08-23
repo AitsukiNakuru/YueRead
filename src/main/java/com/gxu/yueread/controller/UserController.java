@@ -44,4 +44,14 @@ public class UserController {
         }
         return ResultGenerator.genFailResult(userRegisterResult);
     }
+
+    //更新
+    @RequestMapping("/update")
+    public Result userUpdate(@RequestBody UserParam userParam) {
+        String userRegisterResult = userService.update(new User(userParam.getUserId(), userParam.getUserUsername(), userParam.getUserPassword(), userParam.getUserNickname()));
+        if (userRegisterResult.equals(ResultEnum.REGISTER_SUCCESS.getResult())) {
+            return ResultGenerator.genSuccessResult(userRegisterResult);
+        }
+        return ResultGenerator.genFailResult(userRegisterResult);
+    }
 }

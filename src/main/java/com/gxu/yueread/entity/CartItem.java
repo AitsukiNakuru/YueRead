@@ -13,6 +13,17 @@ public class CartItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public CartItem(Integer cartItemId, Integer userId, Integer bookId, Integer bookCount) {
+        this.cartItemId = cartItemId;
+        this.userId = userId;
+        this.bookId = bookId;
+        this.bookCount = bookCount;
+    }
+
+    public CartItem() {
+
+    }
+
     public Integer getCartItemId() {
         return cartItemId;
     }
