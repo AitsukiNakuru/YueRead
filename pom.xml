@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
+    <parent><!--spring boot基础依赖，使用spring boot必须添加这个-->
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.7.1</version>
@@ -17,7 +17,7 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
-        <dependency>
+        <dependency> <!--从事web开发必须引用的spring boot启动器,里面集成了tomcat（我们在src/main/resources/mybatis/application.properties里面配置tomcat的一些信息-->
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
