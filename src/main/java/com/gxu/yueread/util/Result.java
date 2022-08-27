@@ -10,7 +10,7 @@ public class Result<T> implements Serializable {
 
     //业务码，比如成功、失败、权限不足等 code，可自行定义
     //@ApiModelProperty("返回码")
-    private int resultCode;
+    private int statusCode;
     //返回信息，后端在进行业务处理后返回给前端一个提示信息，可自行定义
     //@ApiModelProperty("返回信息")
     private String message;
@@ -21,17 +21,17 @@ public class Result<T> implements Serializable {
     public Result() {
     }
 
-    public Result(int resultCode, String message) {
-        this.resultCode = resultCode;
+    public Result(int statusCode, String message) {
+        this.statusCode = statusCode;
         this.message = message;
     }
 
-    public int getResultCode() {
-        return resultCode;
+    public int getStatusCode() {
+        return statusCode;
     }
 
-    public void setResultCode(int resultCode) {
-        this.resultCode = resultCode;
+    public void setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
     }
 
     public String getMessage() {
@@ -53,7 +53,7 @@ public class Result<T> implements Serializable {
     @Override
     public String toString() {
         return "Result{" +
-                "resultCode=" + resultCode +
+                "statusCode=" + statusCode +
                 ", message='" + message + '\'' +
                 ", data=" + data +
                 '}';
