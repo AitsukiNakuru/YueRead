@@ -8,6 +8,13 @@
     <result column="config_type" jdbcType="INTEGER" property="configType" />
     <result column="book_id" jdbcType="INTEGER" property="bookId" />
   </resultMap>
+  <resultMap id="BaseResultMap2" type="com.gxu.yueread.entity.IndexConfig">
+    <!--@mbg.generated-->
+    <!--@Table index_config-->
+    <id column="config_id" jdbcType="INTEGER" property="configId" />
+    <result column="config_type" jdbcType="INTEGER" property="configType" />
+    <result column="book_id" jdbcType="INTEGER" property="bookId" />
+  </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     config_id, config_type, book_id
@@ -70,16 +77,14 @@
     where config_id = #{configId,jdbcType=INTEGER}
   </update>
 
-  <select id="indexConfigList" resultMap="BaseResultMap">
-    select
-      <include refid="Base_Column_List" />
-    from index_config
-  </select>
-
   <select id="selectByBookId" resultMap="BaseResultMap">
     select
       <include refid="Base_Column_List" />
     from index_config
     where book_id = #{bookId}
+  </select>
+
+  <select id="indexBookList" resultType="com.gxu.yueread.entity.BookInfo">
+
   </select>
 </mapper>

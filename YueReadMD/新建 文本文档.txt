@@ -1,1 +1,0 @@
-order_info book_info user index_config carousel book_category

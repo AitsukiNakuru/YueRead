@@ -1,6 +1,7 @@
 package com.gxu.yueread.dao;
 
 import com.gxu.yueread.entity.BookInfo;
+import com.gxu.yueread.entity.BookListByCategory;
 import com.gxu.yueread.util.PageQueryUtil;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -67,4 +68,7 @@ public interface BookInfoMapper {
 
     List<BookInfo> selectAll();
 
+    List<BookListByCategory> selectListByCategory();
+
+    List<BookInfo> selectListByCarousel();
 }

@@ -79,8 +79,8 @@ public class IndexConfigService {
         return ResultEnum.INDEX_BOOK_UPDATE_ERROR.getResult();
     }
 
-    public List<IndexConfig> indexConfigList() {
-        return indexConfigMapper.indexConfigList();
+    public List<BookInfo> indexBookList() {
+        return indexConfigMapper.indexBookList();
     }
 }
 

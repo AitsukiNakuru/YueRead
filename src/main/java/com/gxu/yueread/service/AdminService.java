@@ -43,8 +43,7 @@ public class AdminService {
     }
 
     public Admin login(String username, String password) {
-        Admin admin = adminMapper.login(username);
-        return admin;
+        return adminMapper.login(username);
     }
 
 

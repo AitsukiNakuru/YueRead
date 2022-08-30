@@ -2,6 +2,7 @@ package com.gxu.yueread.controller;
 
 import com.gxu.yueread.common.ResultEnum;
 import com.gxu.yueread.controller.param.IndexConfigParam;
+import com.gxu.yueread.entity.BookInfo;
 import com.gxu.yueread.entity.IndexConfig;
 import com.gxu.yueread.service.IndexConfigService;
 import com.gxu.yueread.util.BeanUtil;
@@ -72,7 +73,7 @@ public class IndexConfigController {
 
     @RequestMapping("/list")
     public Result indexConfigList() {
-        List<IndexConfig> indexConfigList = indexConfigService.indexConfigList();
+        List<BookInfo> indexConfigList = indexConfigService.indexBookList();
         return ResultGenerator.genSuccessResult(indexConfigList);
     }
 

@@ -1,5 +1,6 @@
 package com.gxu.yueread.dao;
 
+import com.gxu.yueread.entity.BookInfo;
 import com.gxu.yueread.entity.IndexConfig;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -50,7 +51,7 @@ public interface IndexConfigMapper {
      */
     int updateByPrimaryKey(IndexConfig record);
 
-    List<IndexConfig> indexConfigList();
+    List<BookInfo> indexBookList();
 
     IndexConfig selectByBookId(@Param("bookId") Integer bookId);
 }

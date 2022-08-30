@@ -1,6 +1,7 @@
 package com.gxu.yueread.service;
 
 import com.gxu.yueread.common.ResultEnum;
+import com.gxu.yueread.entity.BookListByCategory;
 import com.gxu.yueread.util.PageQueryUtil;
 import com.gxu.yueread.util.PageResult;
 import org.springframework.stereotype.Service;
@@ -77,6 +78,14 @@ public class BookInfoService {
 
     public List<BookInfo> selectAll() {
         return bookInfoMapper.selectAll();
+    }
+
+    public List<BookListByCategory> selectListByCategory() {
+        return bookInfoMapper.selectListByCategory();
+    }
+
+    public List<BookInfo> selectListByCarousel() {
+        return bookInfoMapper.selectListByCarousel();
     }
 }
 
