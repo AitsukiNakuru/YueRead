@@ -3,7 +3,9 @@ package com.gxu.yueread.controller;
 import com.gxu.yueread.common.ResultEnum;
 import com.gxu.yueread.controller.param.CartItemListParam;
 import com.gxu.yueread.controller.param.CartItemParam;
+import com.gxu.yueread.entity.BookInfo;
 import com.gxu.yueread.entity.CartItem;
+import com.gxu.yueread.entity.CartItemBook;
 import com.gxu.yueread.service.CartItemService;
 import com.gxu.yueread.service.UserService;
 import com.gxu.yueread.util.BeanUtil;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -59,12 +62,8 @@ public class CartController {
 
     //列表
     @RequestMapping("/list")
-    public Result cartItemList(@RequestBody CartItemListParam cartItemListParam) {
-        Map params = new HashMap(16);
-        params.put("page", cartItemListParam.getPageNumber());
-        params.put("limit", cartItemListParam.getPageSize());
-        params.put("userId", cartItemListParam.getUserId());
-        PageQueryUtil pageQueryUtil = new PageQueryUtil(params);
-        return ResultGenerator.genSuccessResult(cartItemService.list(pageQueryUtil));
+    public Result cartItemList(@RequestBody CartItemParam cartItemParam) {
+        List<CartItemBook> cartItemList = cartItemService.list(cartItemParam.getUserId());
+        return ResultGenerator.genSuccessResult(cartItemList);
     }
 }

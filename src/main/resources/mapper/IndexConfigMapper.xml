@@ -69,4 +69,17 @@
       book_id = #{bookId,jdbcType=INTEGER}
     where config_id = #{configId,jdbcType=INTEGER}
   </update>
+
+  <select id="indexConfigList" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List" />
+    from index_config
+  </select>
+
+  <select id="selectByBookId" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List" />
+    from index_config
+    where book_id = #{bookId}
+  </select>
 </mapper>

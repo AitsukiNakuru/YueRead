@@ -2,6 +2,7 @@ package com.gxu.yueread.controller;
 import com.gxu.yueread.common.ResultEnum;
 import com.gxu.yueread.controller.param.BookListParam;
 import com.gxu.yueread.controller.param.BookParam;
+import com.gxu.yueread.controller.param.CategoryParam;
 import com.gxu.yueread.entity.BookInfo;
 import com.gxu.yueread.service.BookCategoryService;
 import com.gxu.yueread.service.BookInfoService;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -44,7 +46,7 @@ public class BookInfoController {
     }
 
 
-    //查询图书列表，暂时只能查询书名和分类
+    //查询图书列表
     @RequestMapping("/list")
     public Result bookList(@RequestBody BookListParam bookListParam) {
         Map<String, Object> params;
@@ -85,4 +87,15 @@ public class BookInfoController {
         return ResultGenerator.genFailResult(bookUpdateResult);
     }
 
+    @RequestMapping("/listbycategory")
+    public Result bookListByCategory(@RequestBody CategoryParam categoryParam) {
+        List<BookInfo> bookList = bookInfoService.selectByCategoryId(categoryParam.getCategoryId());
+        return ResultGenerator.genSuccessResult(bookList);
+    }
+
+    @RequestMapping("/listall")
+    public Result bookListAll() {
+        List<BookInfo> bookList = bookInfoService.selectAll();
+        return ResultGenerator.genSuccessResult(bookList);
+    }
 }

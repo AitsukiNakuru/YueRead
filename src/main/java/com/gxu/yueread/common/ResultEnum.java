@@ -45,7 +45,25 @@ public enum ResultEnum {
 
     CATEGORY_NOT_EXIST("分类不存在"),
 
+    CATEGORY_NOT_NULL("该分类下的书籍不为空"),
+
     SAME_USERNAME_EXIST("用户名已存在！"),
+
+    INDEX_BOOK_EXIST("首页已有该书籍"),
+
+    INDEX_BOOK_NOT_EXIST("首页书籍不存在"),
+
+    INDEX_BOOK_ADD_SUCCESS("首页书籍添加成功"),
+
+    INDEX_BOOK_ADD_ERROR("首页书籍添加失败"),
+
+    INDEX_BOOK_DELETE_SUCCESS("首页书籍删除成功"),
+
+    INDEX_BOOK_DELETE_ERROR("首页书籍删除失败"),
+
+    INDEX_BOOK_UPDATE_SUCCESS("首页书籍更新成功"),
+
+    INDEX_BOOK_UPDATE_ERROR("首页书籍更新失败"),
 
     LOGIN_NAME_NULL("请输入登录名！"),
 

@@ -2,6 +2,8 @@ package com.gxu.yueread.service;
 
 import com.gxu.yueread.common.ResultEnum;
 import com.gxu.yueread.controller.param.CategoryParam;
+import com.gxu.yueread.dao.BookInfoMapper;
+import com.gxu.yueread.entity.BookInfo;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.gxu.yueread.dao.BookCategoryMapper;
@@ -14,6 +16,9 @@ public class BookCategoryService {
 
     @Resource
     private BookCategoryMapper bookCategoryMapper;
+
+    @Resource
+    private BookInfoMapper bookInfoMapper;
 
 
     public int deleteByPrimaryKey(Integer categoryId) {
@@ -59,8 +64,12 @@ public class BookCategoryService {
         return ResultEnum.ADD_ERROR.getResult();
     }
 
-    public String bookCategoryDelete(String categoryName) {
-        BookCategory bookCategory = bookCategoryMapper.selectByCategoryName(categoryName);
+    public String bookCategoryDelete(Integer categoryId) {
+        BookCategory bookCategory = bookCategoryMapper.selectByPrimaryKey(categoryId);
+
+        if(bookInfoMapper.selectByCategoryId(categoryId).size() > 0) {
+            return ResultEnum.CATEGORY_NOT_NULL.getResult();
+        }
         if (bookCategory == null) {
             return ResultEnum.CATEGORY_NOT_EXIST.getResult();
         }
@@ -71,9 +80,13 @@ public class BookCategoryService {
     }
 
     public String bookCategoryUpdate(CategoryParam categoryParam) {
-        BookCategory bookCategory = bookCategoryMapper.selectByCategoryName(categoryParam.getOriginalName());
+        BookCategory bookCategory = bookCategoryMapper.selectByPrimaryKey(categoryParam.getCategoryId());
+        BookCategory newCategory = bookCategoryMapper.selectByCategoryName(categoryParam.getCategoryName());
         if (bookCategory == null) {
             return ResultEnum.CATEGORY_NOT_EXIST.getResult();
+        }
+        if ( newCategory != null && !newCategory.getCategoryName().equals(bookCategory.getCategoryName())) {
+            return ResultEnum.SAME_CATEGORY_EXIST.getResult();
         }
         bookCategory.setCategoryName(categoryParam.getCategoryName());
         if (bookCategoryMapper.updateByPrimaryKeySelective(bookCategory) >= 1) {

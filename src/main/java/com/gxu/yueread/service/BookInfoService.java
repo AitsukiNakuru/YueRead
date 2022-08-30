@@ -70,6 +70,14 @@ public class BookInfoService {
         }
         return ResultEnum.UPDATE_ERROR.getResult();
     }
+
+    public List<BookInfo> selectByCategoryId(Integer categoryId) {
+        return bookInfoMapper.selectByCategoryId(categoryId);
+    }
+
+    public List<BookInfo> selectAll() {
+        return bookInfoMapper.selectAll();
+    }
 }
 
 

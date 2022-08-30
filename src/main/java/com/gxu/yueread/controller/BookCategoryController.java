@@ -4,6 +4,7 @@ import com.gxu.yueread.common.ResultEnum;
 import com.gxu.yueread.controller.param.CategoryParam;
 import com.gxu.yueread.entity.BookCategory;
 import com.gxu.yueread.service.BookCategoryService;
+import com.gxu.yueread.service.BookInfoService;
 import com.gxu.yueread.util.Result;
 import com.gxu.yueread.util.ResultGenerator;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,9 @@ public class BookCategoryController {
      */
     @Resource
     private BookCategoryService bookCategoryService;
+
+    @Resource
+    private BookInfoService bookInfoService;
 
     /**
      * 通过主键查询单条数据
@@ -53,7 +57,7 @@ public class BookCategoryController {
     //删除分类
     @RequestMapping("/delete")
     public Result categoryDelete(@RequestBody CategoryParam categoryParam) {
-        String categoryDeleteResult = bookCategoryService.bookCategoryDelete(categoryParam.getCategoryName());
+        String categoryDeleteResult = bookCategoryService.bookCategoryDelete(categoryParam.getCategoryId());
         if (categoryDeleteResult.equals(ResultEnum.DELETE_SUCCESS.getResult())) {
             return ResultGenerator.genSuccessResult(categoryDeleteResult);
         }

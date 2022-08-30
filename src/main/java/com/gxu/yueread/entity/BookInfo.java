@@ -17,6 +17,8 @@ public class BookInfo implements Serializable {
 
     private Integer bookCategoryId;
 
+    private String bookCategoryName;
+
     private String bookCover;
 
     private String detailContent;
@@ -79,6 +81,14 @@ public class BookInfo implements Serializable {
         this.bookCategoryId = bookCategoryId;
     }
 
+    public String getBookCategoryName() {
+        return bookCategoryName;
+    }
+
+    public void setBookCategoryName(String bookCategoryName) {
+        this.bookCategoryName = bookCategoryName;
+    }
+
     public String getBookCover() {
         return bookCover;
     }
@@ -139,6 +149,7 @@ public class BookInfo implements Serializable {
         sb.append(", bookIntro=").append(bookIntro);
         sb.append(", bookAuthor=").append(bookAuthor);
         sb.append(", bookCategoryId=").append(bookCategoryId);
+        sb.append(", bookCategoryName=").append(bookCategoryName);
         sb.append(", bookCover=").append(bookCover);
         sb.append(", detailContent=").append(detailContent);
         sb.append(", originalPrice=").append(originalPrice);

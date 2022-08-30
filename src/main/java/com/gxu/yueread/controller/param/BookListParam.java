@@ -7,6 +7,5 @@ import lombok.Data;
 public class BookListParam {
     private Integer pageNumber;
     private Integer pageSize;
-    private String orderBy;
     private BookInfo bookInfo;
 }

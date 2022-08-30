@@ -14,7 +14,6 @@ import lombok.Data;
 
 @Data
 public class CategoryParam {
-
+    private Integer categoryId;
     private String categoryName;
-    private String originalName;
 }

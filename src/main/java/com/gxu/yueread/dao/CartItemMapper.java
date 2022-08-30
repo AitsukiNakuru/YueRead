@@ -1,6 +1,7 @@
 package com.gxu.yueread.dao;
 
 import com.gxu.yueread.entity.CartItem;
+import com.gxu.yueread.entity.CartItemBook;
 import com.gxu.yueread.util.PageQueryUtil;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -55,7 +56,11 @@ public interface CartItemMapper {
 
     int getTotalCount(PageQueryUtil pageQueryUtil);
 
-    List<Integer> getBookIds(@Param("userId") Integer userId);
+    List<Integer> getBookIds(@Param("userId") Integer userId);//
 
     int update(@Param("cartItem") CartItem cartItem);
+
+    List<CartItemBook> selectByUserId(@Param("userId") Integer userId);
+
+    int addBookCount(@Param("cartItem") CartItem cartItem);
 }

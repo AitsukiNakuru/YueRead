@@ -1,6 +1,7 @@
 package com.gxu.yueread.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class CartItem implements Serializable {
     private Integer cartItemId;
@@ -10,6 +11,8 @@ public class CartItem implements Serializable {
     private Integer bookId;
 
     private Integer bookCount;
+
+
 
     private static final long serialVersionUID = 1L;
 

@@ -62,4 +62,9 @@ public interface BookInfoMapper {
     int getTotalCount(PageQueryUtil pageQueryUtil);
 
     BookInfo selectByIsbn(@Param("bookIsbn") String bookIsbn);
+
+    List<BookInfo> selectByCategoryId(@Param("categoryId") Integer categoryId);
+
+    List<BookInfo> selectAll();
+
 }

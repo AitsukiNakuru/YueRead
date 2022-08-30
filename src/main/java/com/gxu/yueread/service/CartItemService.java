@@ -1,6 +1,9 @@
 package com.gxu.yueread.service;
 
 import com.gxu.yueread.common.ResultEnum;
+import com.gxu.yueread.dao.BookInfoMapper;
+import com.gxu.yueread.entity.BookInfo;
+import com.gxu.yueread.entity.CartItemBook;
 import com.gxu.yueread.util.PageQueryUtil;
 import com.gxu.yueread.util.PageResult;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,9 @@ public class CartItemService {
 
     @Resource
     private CartItemMapper cartItemMapper;
+
+    @Resource
+    private BookInfoMapper bookInfoMapper;
 
 
     public int deleteByPrimaryKey(Integer cartItemId) {
@@ -49,7 +55,7 @@ public class CartItemService {
     public String add(CartItem cartItem) {
         List<Integer> bookIds = cartItemMapper.getBookIds(cartItem.getUserId());
         if (bookIds.contains(cartItem.getBookId())) {
-            cartItemMapper.update(cartItem);
+            cartItemMapper.addBookCount(cartItem);
             return ResultEnum.ADD_SUCCESS.getResult();
         }
         if (cartItemMapper.insertSelective(cartItem) >= 1) {
@@ -72,11 +78,9 @@ public class CartItemService {
         return ResultEnum.DELETE_ERROR.getResult();
     }
 
-    public PageResult list(PageQueryUtil pageQueryUtil) {
-        List<CartItem> list = cartItemMapper.list(pageQueryUtil);
-        int total = cartItemMapper.getTotalCount(pageQueryUtil);
-        PageResult pageResult = new PageResult<>(list, total, pageQueryUtil.getLimit(), pageQueryUtil.getPage());
-        return pageResult;
+    public List<CartItemBook> list(Integer userId) {
+
+        return cartItemMapper.selectByUserId(userId);
     }
 }
 

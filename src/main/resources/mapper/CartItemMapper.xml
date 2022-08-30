@@ -9,6 +9,30 @@
         <result column="book_id" jdbcType="INTEGER" property="bookId"/>
         <result column="book_count" jdbcType="INTEGER" property="bookCount"/>
     </resultMap>
+
+    <resultMap id="BaseResultMap2" type="com.gxu.yueread.entity.CartItemBook">
+        <!--@mbg.generated-->
+        <!--@Table cart_item-->
+        <id column="cart_item_id" jdbcType="INTEGER" property="cartItemBookId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="book_count" jdbcType="INTEGER" property="bookCount"/>
+
+        <collection property="bookInfo" javaType="java.lang.Object" ofType="com.gxu.yueread.entity.BookInfo">
+            <id column="book_id" jdbcType="INTEGER" property="bookId" />
+            <result column="book_name" jdbcType="VARCHAR" property="bookName" />
+            <result column="book_isbn" jdbcType="VARCHAR" property="bookIsbn" />
+            <result column="book_intro" jdbcType="VARCHAR" property="bookIntro" />
+            <result column="book_author" jdbcType="VARCHAR" property="bookAuthor" />
+            <result column="book_category_id" jdbcType="INTEGER" property="bookCategoryId" />
+            <result column="book_category_name" jdbcType="VARCHAR" property="bookCategoryName"/>
+            <result column="book_cover" jdbcType="VARCHAR" property="bookCover" />
+            <result column="detail_content" jdbcType="LONGVARCHAR" property="detailContent" />
+            <result column="original_price" jdbcType="DECIMAL" property="originalPrice" />
+            <result column="book_status" jdbcType="INTEGER" property="bookStatus" />
+            <result column="publisher" jdbcType="VARCHAR" property="publisher" />
+            <result column="publish_date" jdbcType="DATE" property="publishDate" />
+        </collection>
+    </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
         cart_item_id,
@@ -86,7 +110,6 @@
             book_count = #{bookCount,jdbcType=INTEGER}
         where cart_item_id = #{cartItemId,jdbcType=INTEGER}
     </update>
-
     <select id="list" parameterType="Map" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -94,25 +117,34 @@
         where user_id = #{userId}
         limit #{start}, #{limit}
     </select>
-
     <select id="getTotalCount" parameterType="Map" resultType="int">
         select
             count(*)
         from cart_item
         where user_id = #{userId}
     </select>
-
     <select id="getBookIds" resultType="java.lang.Integer">
         select
             book_id
         from cart_item
         where user_id = #{userId}
     </select>
-
     <update id="update" parameterType="com.gxu.yueread.entity.CartItem">
         update cart_item
         set book_count = #{cartItem.bookCount}
         where user_id = #{cartItem.userId} AND book_id = #{cartItem.bookId}
 
+    </update>
+    <select id="selectByUserId" resultMap="BaseResultMap2">
+        select
+            *
+        from cart_item inner join book_info on cart_item.book_id = book_info.book_id
+        where cart_item.user_id = #{userId}
+    </select>
+
+    <update id="addBookCount">
+        update cart_item
+        set book_count = #{cartItem.bookCount} + cart_item.book_count
+        where book_id = #{cartItem.bookId}
     </update>
 </mapper>

@@ -10,6 +10,7 @@
     <result column="book_intro" jdbcType="VARCHAR" property="bookIntro" />
     <result column="book_author" jdbcType="VARCHAR" property="bookAuthor" />
     <result column="book_category_id" jdbcType="INTEGER" property="bookCategoryId" />
+    <result column="book_category_name" jdbcType="VARCHAR" property="bookCategoryName"/>
     <result column="book_cover" jdbcType="VARCHAR" property="bookCover" />
     <result column="detail_content" jdbcType="LONGVARCHAR" property="detailContent" />
     <result column="original_price" jdbcType="DECIMAL" property="originalPrice" />
@@ -19,7 +20,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    book_id, book_name, book_isbn, book_intro, book_author, book_category_id, book_cover, 
+    book_id, book_name, book_isbn, book_intro, book_author, book_category_id, book_category_name, book_cover,
     detail_content, original_price, book_status, publisher, publish_date
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -213,4 +214,19 @@
     from `book_info`
     where book_isbn = #{bookIsbn}
   </select>
+
+  <select id="selectByCategoryId" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List" />
+    from `book_info`
+    where book_category_id = #{categoryId}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List" />
+    from `book_info`
+  </select>
+
+
 </mapper>
