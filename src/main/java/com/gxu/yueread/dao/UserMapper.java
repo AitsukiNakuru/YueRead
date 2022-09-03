@@ -1,5 +1,6 @@
 package com.gxu.yueread.dao;
 
+import com.gxu.yueread.controller.param.PurchaseParam;
 import com.gxu.yueread.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -49,4 +50,6 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     User selectByUsername(@Param("username") String username);
+
+    int updateVipBook(PurchaseParam purchaseParam);
 }

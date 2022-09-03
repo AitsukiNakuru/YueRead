@@ -107,4 +107,12 @@
         from `user`
         where user_username = #{username,jdbcType=VARCHAR}
     </select>
+
+    <update id="updateVipBook" parameterType="com.gxu.yueread.controller.param.PurchaseParam">
+        update user
+        <set>
+            user_vip = #{bookCount,jdbcType=INTEGER} * #{price,jdbcType=DECIMAL} + user.user_vip
+        </set>
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
 </mapper>

@@ -13,7 +13,7 @@
     <resultMap id="BaseResultMap2" type="com.gxu.yueread.entity.CartItemBook">
         <!--@mbg.generated-->
         <!--@Table cart_item-->
-        <id column="cart_item_id" jdbcType="INTEGER" property="cartItemBookId"/>
+        <id column="cart_item_id" jdbcType="INTEGER" property="cartItemId"/>
         <result column="user_id" jdbcType="INTEGER" property="userId"/>
         <result column="book_count" jdbcType="INTEGER" property="bookCount"/>
 

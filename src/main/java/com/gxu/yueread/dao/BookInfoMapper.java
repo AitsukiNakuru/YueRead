@@ -1,5 +1,6 @@
 package com.gxu.yueread.dao;
 
+import com.gxu.yueread.controller.param.PurchaseParam;
 import com.gxu.yueread.entity.BookInfo;
 import com.gxu.yueread.entity.BookListByCategory;
 import com.gxu.yueread.util.PageQueryUtil;
@@ -71,4 +72,6 @@ public interface BookInfoMapper {
     List<BookListByCategory> selectListByCategory();
 
     List<BookInfo> selectListByCarousel();
+
+    int purchaseBook(PurchaseParam purchaseParam);
 }

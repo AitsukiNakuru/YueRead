@@ -105,6 +105,19 @@ public class BookInfoController {
 
     @RequestMapping("/purchase")
     public Result purchaseBook(@RequestBody PurchaseParam purchaseParam) {
+        String purchaseBookResult = bookInfoService.purchaseBook(purchaseParam);
+        if (purchaseBookResult.equals(ResultEnum.PURCHASE_SUCCESS.getResult())) {
+            return ResultGenerator.genSuccessResult(purchaseBookResult);
+        }
+        return ResultGenerator.genFailResult(purchaseBookResult);
+    }
 
+    @RequestMapping("/purchaselist")
+    public Result purchaseList(@RequestBody List<PurchaseParam> purchaseParamList) {
+        String purchaseListResult = bookInfoService.purchaseList(purchaseParamList);
+        if (purchaseListResult.equals(ResultEnum.PURCHASE_SUCCESS.getResult())) {
+            return ResultGenerator.genSuccessResult(purchaseListResult);
+        }
+        return ResultGenerator.genFailResult(purchaseListResult);
     }
 }

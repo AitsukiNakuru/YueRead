@@ -248,6 +248,123 @@
     carousel = #{carousel,jdbcType=INTEGER}
     where book_id = #{bookId,jdbcType=INTEGER}
   </update>
+
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update book_info
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="book_name = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.bookName != null">
+            when book_id = #{item.bookId,jdbcType=INTEGER} then #{item.bookName,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="book_isbn = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.bookIsbn != null">
+            when book_id = #{item.bookId,jdbcType=INTEGER} then #{item.bookIsbn,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="book_intro = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.bookIntro != null">
+            when book_id = #{item.bookId,jdbcType=INTEGER} then #{item.bookIntro,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="book_author = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.bookAuthor != null">
+            when book_id = #{item.bookId,jdbcType=INTEGER} then #{item.bookAuthor,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="book_category_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.bookCategoryId != null">
+            when book_id = #{item.bookId,jdbcType=INTEGER} then #{item.bookCategoryId,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="book_category_name = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.bookCategoryName != null">
+            when book_id = #{item.bookId,jdbcType=INTEGER} then #{item.bookCategoryName,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="book_cover = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.bookCover != null">
+            when book_id = #{item.bookId,jdbcType=INTEGER} then #{item.bookCover,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="detail_content = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.detailContent != null">
+            when book_id = #{item.bookId,jdbcType=INTEGER} then #{item.detailContent,jdbcType=LONGVARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="original_price = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.originalPrice != null">
+            when book_id = #{item.bookId,jdbcType=INTEGER} then #{item.originalPrice,jdbcType=DECIMAL}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="book_status = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.bookStatus != null">
+            when book_id = #{item.bookId,jdbcType=INTEGER} then #{item.bookStatus,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="publisher = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.publisher != null">
+            when book_id = #{item.bookId,jdbcType=INTEGER} then #{item.publisher,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="publish_date = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.publishDate != null">
+            when book_id = #{item.bookId,jdbcType=INTEGER} then #{item.publishDate,jdbcType=DATE}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="book_sale = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.bookSale != null">
+            when book_id = #{item.bookId,jdbcType=INTEGER} then #{item.bookSale,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="book_stock = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.bookStock != null">
+            when book_id = #{item.bookId,jdbcType=INTEGER} then #{item.bookStock,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="carousel = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.carousel != null">
+            when book_id = #{item.bookId,jdbcType=INTEGER} then #{item.carousel,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where book_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.bookId,jdbcType=INTEGER}
+    </foreach>
+  </update>
+
   <select id="bookList" parameterType="Map" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
@@ -311,4 +428,17 @@
     from book_info
     where carousel = 1
   </select>
+
+  <update id="purchaseBook" parameterType="com.gxu.yueread.controller.param.PurchaseParam">
+    update book_info
+    <set>
+      <if test="bookCount != null">
+        book_sale = #{bookCount,jdbcType=INTEGER} + book_sale,
+      </if>
+      <if test="bookCount != null">
+        book_stock = book_stock - #{bookCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
 </mapper>

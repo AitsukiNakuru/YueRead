@@ -42,9 +42,8 @@ public class UserService {
         return userMapper.updateByPrimaryKey(record);
     }
 
-    public User login(String username, String password) {
+    public User login(String username) {
         return userMapper.selectByUsername(username);
-
     }
 
     public String register(User user) {

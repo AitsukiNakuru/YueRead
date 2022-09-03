@@ -21,13 +21,11 @@ public class UserController {
 
     //登录
     @RequestMapping("/login")
-    public Result userLogin(@RequestBody UserParam userParam) {
-        User user = userService.login(userParam.getUserUsername(), userParam.getUserPassword());
-        if (user != null) {
-            if (user.getUserPassword().equals(userParam.getUserPassword())) {
-                Result result = ResultGenerator.genSuccessResult(ResultEnum.LOGIN_SUCCESS.getResult());
-                result.setData(user);
-                return result;
+    public Result userLogin(@RequestBody User user) {
+        User loginUser =  userService.login(user.getUserUsername());
+        if (loginUser != null) {
+            if (user.getUserPassword().equals(loginUser.getUserPassword())) {
+                return ResultGenerator.genSuccessResult(ResultEnum.LOGIN_SUCCESS.getResult());
             }
             return ResultGenerator.genFailResult(ResultEnum.PASSWORD_ERROR.getResult());
         }
@@ -37,8 +35,8 @@ public class UserController {
 
     //注册
     @RequestMapping("/register")
-    public Result userRegister(@RequestBody UserParam userParam) {
-        String userRegisterResult = userService.register(new User(userParam.getUserUsername(), userParam.getUserPassword(), userParam.getUserNickname()));
+    public Result userRegister(@RequestBody User user) {
+        String userRegisterResult = userService.register(user);
         if (userRegisterResult.equals(ResultEnum.REGISTER_SUCCESS.getResult())) {
             return ResultGenerator.genSuccessResult(userRegisterResult);
         }
@@ -47,8 +45,8 @@ public class UserController {
 
     //更新
     @RequestMapping("/update")
-    public Result userUpdate(@RequestBody UserParam userParam) {
-        String userRegisterResult = userService.update(new User(userParam.getUserId(), userParam.getUserUsername(), userParam.getUserPassword(), userParam.getUserNickname()));
+    public Result userUpdate(@RequestBody User user) {
+        String userRegisterResult = userService.update(user);
         if (userRegisterResult.equals(ResultEnum.REGISTER_SUCCESS.getResult())) {
             return ResultGenerator.genSuccessResult(userRegisterResult);
         }
