@@ -6,6 +6,8 @@ import javax.annotation.Resource;
 import com.gxu.yueread.dao.UserMapper;
 import com.gxu.yueread.entity.User;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -59,13 +61,18 @@ public class UserService {
 
     public String update(User user) {
         User targetUser = userMapper.selectByUsername(user.getUserUsername());
-        if (targetUser != null && targetUser.getUserId().equals(user.getUserId())) {
+        if (targetUser != null && !targetUser.getUserId().equals(user.getUserId())) {
             return  ResultEnum.SAME_USERNAME_EXIST.getResult();
         }
-        if (userMapper.updateByPrimaryKey(user) >= 1) {
+        if (userMapper.updateByPrimaryKeySelective(user) >= 1) {
             return ResultEnum.UPDATE_SUCCESS.getResult();
         }
         return ResultEnum.UPDATE_ERROR.getResult();
+    }
+
+
+    public List<User> userList() {
+        return userMapper.userList();
     }
 }
 

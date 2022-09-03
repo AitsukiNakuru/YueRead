@@ -49,10 +49,10 @@ public class AdminService {
 
     public String update(Admin admin) {
         Admin targetAdmin = adminMapper.selectByAdminUsername(admin.getAdminUsername());
-        if (targetAdmin != null && targetAdmin.getAdminId().equals(admin.getAdminId())) {
+        if (targetAdmin != null && !targetAdmin.getAdminId().equals(admin.getAdminId())) {
             return ResultEnum.SAME_USERNAME_EXIST.getResult();
         }
-        if (adminMapper.updateByPrimaryKeySelective(admin) >=1 ) {
+        if (adminMapper.updateByPrimaryKeySelective(admin) >= 1) {
             return ResultEnum.UPDATE_SUCCESS.getResult();
         }
         return ResultEnum.UPDATE_ERROR.getResult();

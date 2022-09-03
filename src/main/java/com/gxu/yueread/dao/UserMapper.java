@@ -5,6 +5,8 @@ import com.gxu.yueread.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper {
     /**
@@ -52,4 +54,6 @@ public interface UserMapper {
     User selectByUsername(@Param("username") String username);
 
     int updateVipBook(PurchaseParam purchaseParam);
+
+    List<User> userList();
 }

@@ -2,7 +2,6 @@ package com.gxu.yueread.controller;
 
 
 import com.gxu.yueread.common.ResultEnum;
-import com.gxu.yueread.controller.param.AdminParam;
 import com.gxu.yueread.entity.Admin;
 import com.gxu.yueread.service.AdminService;
 import com.gxu.yueread.util.Result;
@@ -16,7 +15,7 @@ import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/admin")
-public class AdminUserController {
+public class AdminController {
     @Resource
     private AdminService adminService;
 
@@ -24,12 +23,12 @@ public class AdminUserController {
 
     //登录
     @RequestMapping("/login")
-    public Result login(@RequestBody AdminParam adminParam) {
-        Admin loginAdmin = adminService.login(adminParam.getAdminUsername(), adminParam.getAdminPassword());
+    public Result login(@RequestBody Admin admin) {
+        Admin loginAdmin = adminService.login(admin.getAdminUsername(), admin.getAdminPassword());
         if (loginAdmin != null) {
-            if (loginAdmin.getAdminPassword().equals(adminParam.getAdminPassword())) {
-                Result result = ResultGenerator.genSuccessResult(ResultEnum.LOGIN_SUCCESS.getResult());
-                result.setData(loginAdmin);
+            if (loginAdmin.getAdminPassword().equals(admin.getAdminPassword())) {
+                Result result = ResultGenerator.genSuccessResult(loginAdmin);
+                result.setMessage(ResultEnum.LOGIN_SUCCESS.getResult());
                 return result;
             }
             return ResultGenerator.genFailResult(ResultEnum.PASSWORD_ERROR.getResult());
@@ -40,8 +39,8 @@ public class AdminUserController {
 
     //注册
     @RequestMapping("/register")
-    public Result register(@RequestBody AdminParam adminParam) {
-        String registerResult = adminService.register(new Admin(adminParam.getAdminUsername(), adminParam.getAdminPassword(), adminParam.getAdminNickname()));
+    public Result register(@RequestBody Admin admin) {
+        String registerResult = adminService.register(admin);
         if (registerResult.equals(ResultEnum.REGISTER_SUCCESS.getResult())) {
             return ResultGenerator.genSuccessResult(registerResult);
         }
@@ -51,8 +50,8 @@ public class AdminUserController {
 
     //更新信息
     @RequestMapping("/update")
-    public Result update(@RequestBody AdminParam adminParam) {
-        String updateResult = adminService.update(new Admin(adminParam.getAdminId(), adminParam.getAdminUsername(), adminParam.getAdminPassword(), adminParam.getAdminNickname()));
+    public Result update(@RequestBody Admin admin) {
+        String updateResult = adminService.update(admin);
         if (updateResult.equals(ResultEnum.UPDATE_SUCCESS.getResult())) {
             return ResultGenerator.genSuccessResult(updateResult);
         }
