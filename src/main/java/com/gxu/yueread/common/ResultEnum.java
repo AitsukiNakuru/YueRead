@@ -75,9 +75,15 @@ public enum ResultEnum {
 
     PURCHASE_ERROR("购买失败"),
 
+    STOCK_ERROR("库存不足"),
+
     ORDER_SUCCESS("订单结算成功"),
 
-    ORDER_ERROR("订单结算失败");
+    ORDER_ERROR("订单结算失败"),
+
+    REFUND_SUCCESS("退款成功"),
+
+    REFUND_ERROR("退款失败");
 
 
     private String result;

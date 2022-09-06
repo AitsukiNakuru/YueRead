@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.gxu.yueread.entity.CartItem;
 import com.gxu.yueread.dao.CartItemMapper;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.List;
 
@@ -52,14 +54,29 @@ public class CartItemService {
         return cartItemMapper.updateByPrimaryKey(record);
     }
 
+    @Transactional
     public String add(CartItem cartItem) {
         List<Integer> bookIds = cartItemMapper.getBookIds(cartItem.getUserId());
-        if (bookIds.contains(cartItem.getBookId())) {
-            cartItemMapper.addBookCount(cartItem);
-            return ResultEnum.ADD_SUCCESS.getResult();
-        }
-        if (cartItemMapper.insertSelective(cartItem) >= 1) {
-            return ResultEnum.ADD_SUCCESS.getResult();
+        BookInfo bookInfo = bookInfoMapper.selectByPrimaryKey(cartItem.getBookId());
+        try {
+            if (bookIds.contains(cartItem.getBookId())) {
+                cartItemMapper.addBookCount(cartItem);
+                if (cartItemMapper.selectByUserIdAndBookId(cartItem.getUserId(), cartItem.getBookId() ).getBookCount() > bookInfo.getBookStock()) {
+                    throw new Exception("StockError");
+                }
+                return ResultEnum.ADD_SUCCESS.getResult();
+            } else {
+                if (cartItem.getBookCount() > bookInfoMapper.selectByPrimaryKey(cartItem.getBookId()).getBookStock()) {
+                    return ResultEnum.STOCK_ERROR.getResult();
+                }
+
+                if (cartItemMapper.insertSelective(cartItem) >= 1) {
+                    return ResultEnum.ADD_SUCCESS.getResult();
+                }
+            }
+        } catch(Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return ResultEnum.STOCK_ERROR.getResult();
         }
         return ResultEnum.ADD_ERROR.getResult();
     }

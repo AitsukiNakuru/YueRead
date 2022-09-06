@@ -2,20 +2,16 @@ package com.gxu.yueread.service;
 
 import com.gxu.yueread.common.ResultEnum;
 import com.gxu.yueread.controller.param.PurchaseParam;
-import com.gxu.yueread.dao.CartItemMapper;
-import com.gxu.yueread.dao.UserMapper;
-import com.gxu.yueread.entity.BookListByCategory;
-import com.gxu.yueread.entity.User;
+import com.gxu.yueread.dao.*;
+import com.gxu.yueread.entity.*;
+import com.gxu.yueread.util.OrderGenerator;
 import com.gxu.yueread.util.PageQueryUtil;
 import com.gxu.yueread.util.PageResult;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
-import com.gxu.yueread.dao.BookInfoMapper;
-import com.gxu.yueread.entity.BookInfo;
-
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -29,6 +25,12 @@ public class BookInfoService {
 
     @Resource
     private CartItemMapper cartItemMapper;
+
+    @Resource
+    private OrderItemMapper orderItemMapper;
+
+    @Resource
+    private OrderInfoMapper orderInfoMapper;
 
 
     public int deleteByPrimaryKey(Integer bookId) {
@@ -101,7 +103,17 @@ public class BookInfoService {
     }
 
     public String purchaseBook(PurchaseParam purchaseParam) {
-        if (bookInfoMapper.purchaseBook(purchaseParam) >= 1 && userMapper.updateVipBook(purchaseParam) >= 1) {
+        OrderInfo orderInfo = OrderGenerator.generateOrder(purchaseParam.getUserId(), purchaseParam.getTotalPrice());
+        OrderItem orderItem = new OrderItem(orderInfo.getOrderId(), purchaseParam.getBookId(), purchaseParam.getPrice(), purchaseParam.getBookCount());
+        BookInfo bookInfo = bookInfoMapper.selectByPrimaryKey(purchaseParam.getBookId());
+        if (bookInfo.getBookStock() < purchaseParam.getBookCount()) {
+            return ResultEnum.STOCK_ERROR.getResult();
+        }
+        if (bookInfoMapper.purchaseBook(purchaseParam) >= 1 &&
+                userMapper.updatePurchase(purchaseParam) >= 1 &&
+                orderInfoMapper.insertSelective(orderInfo) >=1 &&
+                orderItemMapper.insertSelective(orderItem) >=1
+        ) {
             return ResultEnum.PURCHASE_SUCCESS.getResult();
         }
         return ResultEnum.PURCHASE_ERROR.getResult();
@@ -109,8 +121,33 @@ public class BookInfoService {
 
     public String purchaseList(List<PurchaseParam> purchaseParamList) {
         int count = 0;
+        boolean flag = false;
+        BigDecimal totalPrice = BigDecimal.valueOf(0);
+        //List<BookInfo> stockErrorBookList = new ArrayList<BookInfo>();
         for (PurchaseParam purchaseParam : purchaseParamList) {
-            if (bookInfoMapper.purchaseBook(purchaseParam) >= 1 && userMapper.updateVipBook(purchaseParam) >= 1 && cartItemMapper.deleteByPrimaryKey(purchaseParam.getCartItemId()) >= 1) {
+            totalPrice = totalPrice.add(purchaseParam.getTotalPrice());
+            BookInfo bookInfo = bookInfoMapper.selectByPrimaryKey(purchaseParam.getBookId());
+            if (purchaseParam.getBookCount() > bookInfo.getBookStock()) {
+                CartItem cartItem = new CartItem();
+                cartItem.setCartItemId(purchaseParam.getCartItemId());
+                cartItem.setBookCount(bookInfo.getBookStock());
+                cartItemMapper.updateByPrimaryKeySelective(cartItem);
+                flag = true;
+            }
+        }
+        if (flag) {
+            return ResultEnum.STOCK_ERROR.getResult();
+        }
+
+        OrderInfo orderInfo = OrderGenerator.generateOrder(purchaseParamList.get(0).getUserId(), totalPrice);
+        orderInfoMapper.insertSelective(orderInfo);
+        for (PurchaseParam purchaseParam : purchaseParamList) {
+            OrderItem orderItem = new OrderItem(orderInfo.getOrderId(), purchaseParam.getBookId(), purchaseParam.getPrice(), purchaseParam.getBookCount());
+            if (bookInfoMapper.purchaseBook(purchaseParam) >= 1 &&
+                    userMapper.updatePurchase(purchaseParam) >= 1 &&
+                    cartItemMapper.deleteByPrimaryKey(purchaseParam.getCartItemId()) >= 1 &&
+                    orderItemMapper.insertSelective(orderItem) >= 1
+            ) {
                 count++;
             }
         }
@@ -118,6 +155,15 @@ public class BookInfoService {
             return ResultEnum.PURCHASE_SUCCESS.getResult();
         }
         return ResultEnum.PURCHASE_ERROR.getResult();
+
+    }
+
+    public List<BookInfo> selectAllUser() {
+        return bookInfoMapper.selectAllUser();
+    }
+
+    public List<BookListByCategory> selectListByCategoryUser() {
+        return bookInfoMapper.selectListByCategoryUser();
     }
 }
 

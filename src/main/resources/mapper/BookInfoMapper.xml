@@ -441,4 +441,32 @@
     </set>
     where book_id = #{bookId,jdbcType=INTEGER}
   </update>
+
+  <update id="bookRefund" parameterType="com.gxu.yueread.entity.OrderItem">
+    update book_info
+    <set>
+      <if test="bookCount != null">
+        book_sale = book_sale - #{bookCount,jdbcType=INTEGER},
+      </if>
+      <if test="bookCount != null">
+        book_stock = book_stock + #{bookCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAllUser" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `book_info`
+    where book_status = 1
+
+  </select>
+
+  <select id="selectListByCategoryUser" resultMap="BookListByCategoryMap">
+    select
+      *
+    from book_category left join book_info on category_id = book_info.book_category_id
+    where book_info.book_status = 1
+  </select>
 </mapper>

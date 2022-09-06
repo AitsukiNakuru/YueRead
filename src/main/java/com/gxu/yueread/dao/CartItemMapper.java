@@ -56,6 +56,7 @@ public interface CartItemMapper {
 
     int getTotalCount(PageQueryUtil pageQueryUtil);
 
+    //查该用户购物车中的所有书籍
     List<Integer> getBookIds(@Param("userId") Integer userId);//
 
     int update(@Param("cartItem") CartItem cartItem);
@@ -63,4 +64,6 @@ public interface CartItemMapper {
     List<CartItemBook> selectByUserId(@Param("userId") Integer userId);
 
     int addBookCount(@Param("cartItem") CartItem cartItem);
+
+    CartItem selectByUserIdAndBookId(@Param("userId") Integer userId, @Param("bookId") Integer bookId);
 }

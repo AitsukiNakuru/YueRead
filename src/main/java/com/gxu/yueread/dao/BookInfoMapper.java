@@ -3,6 +3,7 @@ package com.gxu.yueread.dao;
 import com.gxu.yueread.controller.param.PurchaseParam;
 import com.gxu.yueread.entity.BookInfo;
 import com.gxu.yueread.entity.BookListByCategory;
+import com.gxu.yueread.entity.OrderItem;
 import com.gxu.yueread.util.PageQueryUtil;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -74,4 +75,10 @@ public interface BookInfoMapper {
     List<BookInfo> selectListByCarousel();
 
     int purchaseBook(PurchaseParam purchaseParam);
+
+    int bookRefund(OrderItem orderItem);
+
+    List<BookInfo> selectAllUser();
+
+    List<BookListByCategory> selectListByCategoryUser();
 }

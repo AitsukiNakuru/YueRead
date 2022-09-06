@@ -4,43 +4,37 @@
     <resultMap id="BaseResultMap" type="com.gxu.yueread.entity.User">
         <!--@mbg.generated-->
         <!--@Table `user`-->
-        <id column="user_id" jdbcType="INTEGER" property="userId"/>
-        <result column="user_username" jdbcType="VARCHAR" property="userUsername"/>
-        <result column="user_password" jdbcType="VARCHAR" property="userPassword"/>
-        <result column="user_nickname" jdbcType="VARCHAR" property="userNickname"/>
-        <result column="user_vip" jdbcType="INTEGER" property="userVip"/>
+        <id column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="user_username" jdbcType="VARCHAR" property="userUsername" />
+        <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+        <result column="user_nickname" jdbcType="VARCHAR" property="userNickname" />
+        <result column="user_purchase" jdbcType="DECIMAL" property="userPurchase" />
+        <result column="user_vip" jdbcType="INTEGER" property="userVip" />
     </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
-        user_id,
-        user_username,
-        user_password,
-        user_nickname,
-        user_vip
+        user_id, user_username, user_password, user_nickname, user_purchase, user_vip
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         <!--@mbg.generated-->
         select
-        <include refid="Base_Column_List"/>
+        <include refid="Base_Column_List" />
         from `user`
         where user_id = #{userId,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         <!--@mbg.generated-->
-        delete
-        from `user`
+        delete from `user`
         where user_id = #{userId,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" keyColumn="user_id" keyProperty="userId" parameterType="com.gxu.yueread.entity.User"
-            useGeneratedKeys="true">
+    <insert id="insert" keyColumn="user_id" keyProperty="userId" parameterType="com.gxu.yueread.entity.User" useGeneratedKeys="true">
         <!--@mbg.generated-->
         insert into `user` (user_username, user_password, user_nickname,
-                            user_vip)
+        user_purchase, user_vip)
         values (#{userUsername,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, #{userNickname,jdbcType=VARCHAR},
-                #{userVip,jdbcType=INTEGER})
+        #{userPurchase,jdbcType=DECIMAL}, #{userVip,jdbcType=INTEGER})
     </insert>
-    <insert id="insertSelective" keyColumn="user_id" keyProperty="userId" parameterType="com.gxu.yueread.entity.User"
-            useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="user_id" keyProperty="userId" parameterType="com.gxu.yueread.entity.User" useGeneratedKeys="true">
         <!--@mbg.generated-->
         insert into `user`
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -52,6 +46,9 @@
             </if>
             <if test="userNickname != null">
                 user_nickname,
+            </if>
+            <if test="userPurchase != null">
+                user_purchase,
             </if>
             <if test="userVip != null">
                 user_vip,
@@ -66,6 +63,9 @@
             </if>
             <if test="userNickname != null">
                 #{userNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="userPurchase != null">
+                #{userPurchase,jdbcType=DECIMAL},
             </if>
             <if test="userVip != null">
                 #{userVip,jdbcType=INTEGER},
@@ -85,6 +85,9 @@
             <if test="userNickname != null">
                 user_nickname = #{userNickname,jdbcType=VARCHAR},
             </if>
+            <if test="userPurchase != null">
+                user_purchase = #{userPurchase,jdbcType=DECIMAL},
+            </if>
             <if test="userVip != null">
                 user_vip = #{userVip,jdbcType=INTEGER},
             </if>
@@ -95,9 +98,10 @@
         <!--@mbg.generated-->
         update `user`
         set user_username = #{userUsername,jdbcType=VARCHAR},
-            user_password = #{userPassword,jdbcType=VARCHAR},
-            user_nickname = #{userNickname,jdbcType=VARCHAR},
-            user_vip      = #{userVip,jdbcType=INTEGER}
+        user_password = #{userPassword,jdbcType=VARCHAR},
+        user_nickname = #{userNickname,jdbcType=VARCHAR},
+        user_purchase = #{userPurchase,jdbcType=DECIMAL},
+        user_vip = #{userVip,jdbcType=INTEGER}
         where user_id = #{userId,jdbcType=INTEGER}
     </update>
 
@@ -108,17 +112,25 @@
         where user_username = #{username,jdbcType=VARCHAR}
     </select>
 
-    <update id="updateVipBook" parameterType="com.gxu.yueread.controller.param.PurchaseParam">
+    <update id="updatePurchase" parameterType="com.gxu.yueread.controller.param.PurchaseParam">
         update user
         <set>
-            user_vip = #{bookCount,jdbcType=INTEGER} * #{price,jdbcType=DECIMAL} + user.user_vip
+            user.user_purchase = #{bookCount,jdbcType=INTEGER} * #{price,jdbcType=DECIMAL} + user.user_purchase
         </set>
         where user_id = #{userId,jdbcType=INTEGER}
     </update>
 
     <select id="userList" resultMap="BaseResultMap">
         select
-            <include refid="Base_Column_List" />
+        <include refid="Base_Column_List" />
         from user
     </select>
+
+    <update id="orderRefund" parameterType="com.gxu.yueread.entity.OrderInfo">
+        update user
+        <set>
+            user.user_purchase = user.user_purchase - #{totalPrice,jdbcType=DECIMAL}
+        </set>
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
 </mapper>

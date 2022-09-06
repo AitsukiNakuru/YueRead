@@ -11,4 +11,7 @@ public class PurchaseParam {
     private Integer bookCount;
     private Integer userId;
     private BigDecimal price;
+    public BigDecimal getTotalPrice() {
+        return price.multiply(BigDecimal.valueOf(bookCount));
+    }
 }

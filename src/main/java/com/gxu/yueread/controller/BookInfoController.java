@@ -89,10 +89,22 @@ public class BookInfoController {
         return ResultGenerator.genSuccessResult(bookListByCategory);
     }
 
+    @RequestMapping("/listbycategoryuser")
+    public Result bookListByCategoryUser() {
+        List<BookListByCategory> bookListByCategory = bookInfoService.selectListByCategoryUser();
+        return ResultGenerator.genSuccessResult(bookListByCategory);
+    }
+
     //所有书籍列表
     @RequestMapping("/listall")
     public Result bookListAll() {
         List<BookInfo> bookList = bookInfoService.selectAll();
+        return ResultGenerator.genSuccessResult(bookList);
+    }
+
+    @RequestMapping("/listalluser")
+    public Result bookListAllUser() {
+        List<BookInfo> bookList = bookInfoService.selectAllUser();
         return ResultGenerator.genSuccessResult(bookList);
     }
 

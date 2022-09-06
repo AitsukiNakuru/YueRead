@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxu.yueread.dao.OrderInfoMapper">
+  <resultMap id="BaseResultMap" type="com.gxu.yueread.entity.OrderInfo">
+    <!--@mbg.generated-->
+    <!--@Table order_info-->
+    <id column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="total_price" jdbcType="DECIMAL" property="totalPrice" />
+    <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
+    <result column="order_date" jdbcType="TIMESTAMP" property="orderDate" />
+  </resultMap>
+
+  <resultMap id="OrderListMap" type="com.gxu.yueread.entity.OrderListItem">
+    <!--OrderListItem-->
+
+    <id column="user_id" jdbcType="INTEGER"/>
+    <!--user-->
+    <association property="user" javaType="com.gxu.yueread.entity.User">
+      <id column="user_id" jdbcType="INTEGER" property="userId"/>
+      <result column="user_username" jdbcType="VARCHAR" property="userUsername"/>
+      <result column="user_password" jdbcType="VARCHAR" property="userPassword"/>
+      <result column="user_nickname" jdbcType="VARCHAR" property="userNickname"/>
+      <result column="user_purchase" jdbcType="INTEGER" property="userPurchase"/>
+    </association>
+
+    <!--userOrderListItemBookList-->
+    <collection property="userOrderList" ofType="com.gxu.yueread.entity.UserOrderListItem">
+      <id column="order_id" jdbcType="VARCHAR" property="orderId" />
+      <result column="total_price" jdbcType="DECIMAL" property="totalPrice"/>
+      <result column="order_date" jdbcType="DATE" property="orderDate" />
+      <result column="order_status" jdbcType="INTEGER" property="orderStatus"/>
+      <collection property="bookList" ofType="com.gxu.yueread.entity.UserOrderListItemBook">
+        <!--bookInfo-->
+        <id column="book_id" jdbcType="INTEGER"/>
+        <result column="book_count" jdbcType="INTEGER" property="bookCount"/>
+        <result column="selling_price" jdbcType="DECIMAL" property="sellingPrice"/>
+        <association property="bookInfo" javaType="com.gxu.yueread.entity.BookInfo">
+          <id column="book_id" jdbcType="INTEGER" property="bookId" />
+          <result column="book_name" jdbcType="VARCHAR" property="bookName" />
+          <result column="book_isbn" jdbcType="VARCHAR" property="bookIsbn" />
+          <result column="book_intro" jdbcType="VARCHAR" property="bookIntro" />
+          <result column="book_author" jdbcType="VARCHAR" property="bookAuthor" />
+          <result column="book_category_id" jdbcType="INTEGER" property="bookCategoryId" />
+          <result column="book_category_name" jdbcType="VARCHAR" property="bookCategoryName" />
+          <result column="book_cover" jdbcType="VARCHAR" property="bookCover" />
+          <result column="detail_content" jdbcType="LONGVARCHAR" property="detailContent" />
+          <result column="original_price" jdbcType="DECIMAL" property="originalPrice" />
+          <result column="book_status" jdbcType="INTEGER" property="bookStatus" />
+          <result column="publisher" jdbcType="VARCHAR" property="publisher" />
+          <result column="publish_date" jdbcType="DATE" property="publishDate" />
+          <result column="book_sale" jdbcType="INTEGER" property="bookSale" />
+          <result column="book_stock" jdbcType="INTEGER" property="bookStock" />
+          <result column="carousel" jdbcType="INTEGER" property="carousel" />
+        </association>
+      </collection>
+    </collection>
+
+  </resultMap>
+
+  <resultMap id="UserOrderListMap" type="com.gxu.yueread.entity.UserOrderListItem">
+    <id column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="total_price" jdbcType="DECIMAL" property="totalPrice"/>
+    <result column="order_date" jdbcType="DATE" property="orderDate" />
+    <result column="order_status" jdbcType="INTEGER" property="orderStatus"/>
+    <collection property="bookList" ofType="com.gxu.yueread.entity.UserOrderListItemBook">
+      <!--bookInfo-->
+      <id column="book_id" jdbcType="INTEGER"/>
+      <result column="book_count" jdbcType="INTEGER" property="bookCount"/>
+      <result column="selling_price" jdbcType="DECIMAL" property="sellingPrice"/>
+      <association property="bookInfo" javaType="com.gxu.yueread.entity.BookInfo">
+        <id column="book_id" jdbcType="INTEGER" property="bookId" />
+        <result column="book_name" jdbcType="VARCHAR" property="bookName" />
+        <result column="book_isbn" jdbcType="VARCHAR" property="bookIsbn" />
+        <result column="book_intro" jdbcType="VARCHAR" property="bookIntro" />
+        <result column="book_author" jdbcType="VARCHAR" property="bookAuthor" />
+        <result column="book_category_id" jdbcType="INTEGER" property="bookCategoryId" />
+        <result column="book_category_name" jdbcType="VARCHAR" property="bookCategoryName" />
+        <result column="book_cover" jdbcType="VARCHAR" property="bookCover" />
+        <result column="detail_content" jdbcType="LONGVARCHAR" property="detailContent" />
+        <result column="original_price" jdbcType="DECIMAL" property="originalPrice" />
+        <result column="book_status" jdbcType="INTEGER" property="bookStatus" />
+        <result column="publisher" jdbcType="VARCHAR" property="publisher" />
+        <result column="publish_date" jdbcType="DATE" property="publishDate" />
+        <result column="book_sale" jdbcType="INTEGER" property="bookSale" />
+        <result column="book_stock" jdbcType="INTEGER" property="bookStock" />
+        <result column="carousel" jdbcType="INTEGER" property="carousel" />
+      </association>
+    </collection>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    order_id, user_id, total_price, order_status, order_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from order_info
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from order_info
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gxu.yueread.entity.OrderInfo">
+    <!--@mbg.generated-->
+    insert into order_info (order_id, user_id, total_price, 
+      order_status, order_date)
+    values (#{orderId,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{totalPrice,jdbcType=DECIMAL},
+      #{orderStatus,jdbcType=INTEGER}, #{orderDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gxu.yueread.entity.OrderInfo">
+    <!--@mbg.generated-->
+    insert into order_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="totalPrice != null">
+        total_price,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="orderDate != null">
+        order_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="totalPrice != null">
+        #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderDate != null">
+        #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxu.yueread.entity.OrderInfo">
+    <!--@mbg.generated-->
+    update order_info
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="totalPrice != null">
+        total_price = #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderDate != null">
+        order_date = #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gxu.yueread.entity.OrderInfo">
+    <!--@mbg.generated-->
+    update order_info
+    set user_id = #{userId,jdbcType=INTEGER},
+      total_price = #{totalPrice,jdbcType=DECIMAL},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      order_date = #{orderDate,jdbcType=TIMESTAMP}
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="orderListAll" resultMap="OrderListMap">
+    select
+      *
+    from ((user left join order_info on user.user_id = order_info.user_id) left join order_item on order_item.order_id = order_info.order_id) left join book_info on book_info.book_id = order_item.book_id
+  </select>
+
+  <select id="selectOrderItemListByPrimaryKey" resultType="com.gxu.yueread.entity.OrderItem">
+    select
+      *
+    from order_item
+    where order_id = #{orderId, jdbcType=VARCHAR}
+  </select>
+
+  <update id="orderRefund" parameterType="com.gxu.yueread.entity.OrderInfo">
+    update order_info
+    <set>
+      order_status = 2
+    </set>
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="orderListByUser" resultMap="UserOrderListMap">
+    select
+      *
+    from (order_info left join order_item on order_info.order_id = order_item.order_id) left join book_info on order_item.book_id = book_info.book_id
+    where order_info.user_id = #{userId}
+  </select>
+</mapper>

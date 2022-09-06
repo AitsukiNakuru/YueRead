@@ -147,4 +147,11 @@
         set book_count = #{cartItem.bookCount} + cart_item.book_count
         where book_id = #{cartItem.bookId}
     </update>
+
+    <select id="selectByUserIdAndBookId" resultMap="BaseResultMap">
+        select
+            <include refid="Base_Column_List" />
+        from cart_item
+        where user_id = #{userId} AND book_id = #{bookId}
+    </select>
 </mapper>

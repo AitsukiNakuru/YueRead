@@ -1,7 +1,6 @@
 package com.gxu.yueread.controller;
 
 import com.gxu.yueread.common.ResultEnum;
-import com.gxu.yueread.controller.param.UserParam;
 import com.gxu.yueread.entity.User;
 import com.gxu.yueread.service.UserService;
 import com.gxu.yueread.util.Result;
