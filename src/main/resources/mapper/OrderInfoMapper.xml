@@ -64,6 +64,7 @@
     <result column="order_date" jdbcType="TIMESTAMP" property="orderDate" />
     <result column="order_status" jdbcType="INTEGER" property="orderStatus"/>
     <collection property="bookList" ofType="com.gxu.yueread.entity.UserOrderListItemBook">
+      
       <!--bookInfo-->
       <id column="book_id" jdbcType="INTEGER"/>
       <result column="book_count" jdbcType="INTEGER" property="bookCount"/>
