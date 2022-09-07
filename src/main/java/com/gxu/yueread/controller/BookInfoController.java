@@ -132,4 +132,10 @@ public class BookInfoController {
         }
         return ResultGenerator.genFailResult(purchaseListResult);
     }
+
+    @RequestMapping("/hotsale")
+    public Result hotSaleList() {
+        List<BookInfo> hotSaleList = bookInfoService.hotSaleList();
+        return ResultGenerator.genSuccessResult(hotSaleList);
+    }
 }

@@ -469,4 +469,12 @@
     from book_category left join book_info on category_id = book_info.book_category_id
     where book_info.book_status = 1
   </select>
+
+  <select id="hotSaleList" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List" />
+    from book_info
+    order by book_sale desc
+    limit 12
+  </select>
 </mapper>

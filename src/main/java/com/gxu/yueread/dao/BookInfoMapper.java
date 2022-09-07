@@ -81,4 +81,6 @@ public interface BookInfoMapper {
     List<BookInfo> selectAllUser();
 
     List<BookListByCategory> selectListByCategoryUser();
+
+    List<BookInfo> hotSaleList();
 }

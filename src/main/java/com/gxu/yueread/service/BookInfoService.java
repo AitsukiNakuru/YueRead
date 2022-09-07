@@ -165,6 +165,10 @@ public class BookInfoService {
     public List<BookListByCategory> selectListByCategoryUser() {
         return bookInfoMapper.selectListByCategoryUser();
     }
+
+    public List<BookInfo> hotSaleList() {
+        return bookInfoMapper.hotSaleList();
+    }
 }
 
 
