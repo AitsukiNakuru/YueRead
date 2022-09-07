@@ -28,7 +28,7 @@
     <collection property="userOrderList" ofType="com.gxu.yueread.entity.UserOrderListItem">
       <id column="order_id" jdbcType="VARCHAR" property="orderId" />
       <result column="total_price" jdbcType="DECIMAL" property="totalPrice"/>
-      <result column="order_date" jdbcType="DATE" property="orderDate" />
+      <result column="order_date" jdbcType="TIMESTAMP" property="orderDate" />
       <result column="order_status" jdbcType="INTEGER" property="orderStatus"/>
       <collection property="bookList" ofType="com.gxu.yueread.entity.UserOrderListItemBook">
         <!--bookInfo-->
@@ -61,7 +61,7 @@
   <resultMap id="UserOrderListMap" type="com.gxu.yueread.entity.UserOrderListItem">
     <id column="order_id" jdbcType="VARCHAR" property="orderId" />
     <result column="total_price" jdbcType="DECIMAL" property="totalPrice"/>
-    <result column="order_date" jdbcType="DATE" property="orderDate" />
+    <result column="order_date" jdbcType="TIMESTAMP" property="orderDate" />
     <result column="order_status" jdbcType="INTEGER" property="orderStatus"/>
     <collection property="bookList" ofType="com.gxu.yueread.entity.UserOrderListItemBook">
       <!--bookInfo-->
