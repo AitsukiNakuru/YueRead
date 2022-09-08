@@ -1,4 +1,4 @@
-package com.gxu.yueread;
+package com.gxu.yueread.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
